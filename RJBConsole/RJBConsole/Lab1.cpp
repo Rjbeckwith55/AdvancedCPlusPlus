@@ -10,11 +10,11 @@ Descr:
 #include <cassert>
 using namespace std;
 
-vector<int> calcQuadratic(double, double, double);
+vector<double> calcQuadratic(double, double, double);
 
 int main() {
 	double a, b, c;
-	vector<int> x;
+	vector<double> x;
 
 	// read input for a, b ,and c
 	cout << "Enter in the value for a: ";
@@ -32,19 +32,19 @@ int main() {
 		cout << "Error data does not follow this condition b*b > 4 * a*c && a != 0" << a << endl;
 		exit(EXIT_FAILURE);
 	}
-	cout << "One real root = " << x[0] << " Second real root: " << x[1] << endl;
+	cout << "First real root = " << x[0] << " Second real root: " << x[1] << endl;
 	return 0;
 }
 //***PART E***
 //Precondition: b2>4ac and a!=0
 //Postcondition: the two real roots are returned in a vector
-vector<int> calcQuadratic(double a, double b, double c) {
+vector<double> calcQuadratic(double a, double b, double c) {
 	// local delarations
 	double x1, x2;
-	vector<int> x;
+	vector<double> x;
 
 	// quadratic formula
-	if (!(b*b > 4 * a*c && a != 0)) {
+	if (!(b*b >= 4 * a*c && a != 0)) {
 		throw "Error!";
 	}
 	
