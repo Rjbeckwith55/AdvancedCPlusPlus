@@ -35,44 +35,14 @@ int main() {
 	cout << "First real root = " << x[0] << " Second real root: " << x[1] << endl;
 	return 0;
 }
-//***PART E***
+
+//***PART D***
 //Precondition: b2>4ac and a!=0
 //Postcondition: the two real roots are returned in a vector
 vector<double> calcQuadratic(double a, double b, double c) {
 	// local delarations
 	double x1, x2;
 	vector<double> x;
-
-	// quadratic formula
-	if (!(b*b >= 4 * a*c && a != 0)) {
-		throw "Error!";
-	}
-	
-	x1 = (-b - sqrt((b*b) - (4 * a*c))) / (2 * a);
-	x2 = (-b + sqrt((b*b) - (4 * a*c))) / (2 * a);
-
-	// add the two values to the vector to send back to the original function
-	x.push_back(x1);
-	x.push_back(x2);
-
-	return x;
-}
-
-
-/*Enter in the value for a: 1
-Enter in the value for b: 20
-Enter in the value for c: 100
-Error data does not follow this condition b*b > 4 * a*c && a != 0Error!
-*/
-
-/*
-//***PART D***
-//Precondition: b2>4ac and a!=0
-//Postcondition: the two real roots are returned in a vector
-vector<int> calcQuadratic(double a, double b, double c) {
-	// local delarations
-	double x1, x2;
-	vector<int> x;
 
 	// quadratic formula
 	assert(b*b > 4 * a*c && a != 0);
@@ -86,9 +56,40 @@ vector<int> calcQuadratic(double a, double b, double c) {
 	return x;
 
 }
+
 /* EXAMPLE OUTPUT
 Enter in the value for a: 1
 Enter in the value for b: 20
 Enter in the value for c: 100
 Assertion failed: b*b > 4 * a*c && a !=0, file c:\users\rjbec\source\repos\advancedcplusplus\rjbconsole\rjbconsole\lab1.cpp, line 38
 */
+
+
+//***PART E***
+//Precondition: b2>4ac and a!=0
+//Postcondition: the two real roots are returned in a vector
+/*vector<double> calcQuadratic(double a, double b, double c) {
+	// local delarations
+	double x1, x2;
+	vector<double> x;
+
+	// quadratic formula
+	if (!(b*b > 4 * a*c && a != 0)) {
+		throw "Error!";
+	}
+
+	x1 = (-b - sqrt((b*b) - (4 * a*c))) / (2 * a);
+	x2 = (-b + sqrt((b*b) - (4 * a*c))) / (2 * a);
+
+	// add the two values to the vector to send back to the original function
+	x.push_back(x1);
+	x.push_back(x2);
+
+	return x;
+}
+/*SAMPLE OUTPUT
+Enter in the value for a: 1
+Enter in the value for b: 20
+Enter in the value for c: 100
+Error data does not follow this condition b*b > 4 * a*c && a != 0Error!
+Press any key to continue . . .*/
