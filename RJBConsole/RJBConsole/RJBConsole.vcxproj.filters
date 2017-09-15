@@ -15,18 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Card.cpp">
+    <ClCompile Include="Lab3\sequence_test.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="useCard.cpp">
+    <ClCompile Include="Lab3\SequenceFixed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Card.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Deck.h">
+    <ClInclude Include="Lab3\sequenceFixed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
