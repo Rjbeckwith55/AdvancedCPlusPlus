@@ -11,17 +11,7 @@ Card::Card(int s, int r) {
 	rank = r;
 }
 void Card::setSuit(int s) {
-	switch (s) {
-	case suits::diamonds:
-		suit = static_cast<int>(suits::diamonds);
-	case suits::clubs:
-		suit = static_cast<int>(suits::clubs);
-	case suits::hearts:
-		suit = static_cast<int>(suits::hearts);
-	case suits::spades:
-		suit = static_cast<int>(suits::spades);
-	}
-
+	suit = s;
 
 }
 
@@ -34,7 +24,28 @@ void Card::setRank(int r) {
 }
 
 ostream& operator <<(ostream& lhs, const Card& c) {
-	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: " << static_cast<Card::suits>(c.suit) << "Card's Value: " << c.rank << endl;
+	
+	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
+	switch (c.rank) {
+	case Card::ranks::two:
+		lhs << "Two";
+		break;
+	}
+	switch (c.suit) {
+	case Card::suits::diamonds:
+		lhs << "Diamonds ";
+		break;
+	case Card::suits::clubs:
+		lhs << "Clubs ";
+		break;
+	case Card::suits::hearts:
+		lhs << "Hearts ";
+		break;
+	case Card::suits::spades:
+		lhs << "Spades ";
+		break;
+	}
+		lhs << "Card's Value: " << c.rank << endl;
 	return lhs;
 
 }

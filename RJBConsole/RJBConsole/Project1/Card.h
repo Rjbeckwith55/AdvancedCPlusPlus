@@ -13,8 +13,8 @@ class Card {
 private:
 	int suit;
 	int rank;
-	enum suits { clubs, diamonds, hearts, spades };
-	enum ranks { two = 1, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace };
+	enum suits { clubs=1, diamonds, hearts, spades };
+	enum ranks { two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace };
 public:
 	Card(int, int);
 	//Card(); // default constructor
