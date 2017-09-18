@@ -78,21 +78,28 @@ void sequenceFixed::insert(const sequenceFixed::value_type& entry){
 void sequenceFixed::attach(const sequenceFixed::value_type& entry) {
 	assert(used < CAPACITY);
 	//assert(is_item());
-	used++;
+	
 	//see if the current_index is valid; if not reset current_index to front
 	if (is_item() == false) {
-		current_index = used-1;
+		current_index = used;
+		data[used] = entry;
+		used++;
 	}
 	//move item over from current_index
-	current_index++;
-	for (size_type i = used; i> current_index; i--)
-	{
-		data[i] = data[i - 1];
+	else {
+		used++;
+		current_index++;
+		for (size_type i = used; i> current_index; i--)
+		{
+			data[i] = data[i - 1];
+		}
+		//insert the new entry
+		data[current_index] = entry;
+		
 	}
 	
-	//insert the new entry
-	data[current_index] = entry;
-	// increment the number of items used
+	
+	
 
 
 }
