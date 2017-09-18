@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Card.cpp">
+    <ClCompile Include="Project1\Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="useCard.cpp">
+    <ClCompile Include="Project1\useCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Card.h">
+    <ClInclude Include="Project1\Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Deck.h">
+    <ClInclude Include="Project1\Deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
