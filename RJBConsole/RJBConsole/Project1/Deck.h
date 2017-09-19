@@ -20,11 +20,11 @@ public:
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
 
-
+	friend void displayCards();
 	Deck();
 
 
-	friend void DisplayCards();
+	
 private:
 	value_type Cards;
 	// number of items stored

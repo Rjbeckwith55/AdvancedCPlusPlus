@@ -8,6 +8,7 @@ Implementation file for the Deck class*/
 #include "Deck.h"
 
 const Deck::size_type CAPACITY = 52;
+
 Deck::Deck() {
 	int r = Card::ranks::two;
 	int s = Card::suits::clubs;
@@ -23,6 +24,11 @@ Deck::Deck() {
 
 	}
 }
-void DisplayCards() {
 
+void displayCards() {
+	for (Deck::size_type i = 0; i < CAPACITY; i++)
+	{
+		cout <<Cards[i];
+	}
+	
 }
