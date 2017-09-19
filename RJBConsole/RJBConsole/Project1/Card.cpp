@@ -22,7 +22,17 @@ void Card::setRank(int r) {
 		rank = static_cast<int>(ranks::ace);
 	}
 }
+int Card::operator +(const int& rhs) {
+	return rank + rhs;
+}
+int Card::operator +(const Card& rhs) {
+	return rank + rhs.getRank();
+}
+int operator +(const int& lhs, const Card& rhs) {
+	return lhs + rhs.rank;
+}
 
+// Output the card rank and the card suit
 ostream& operator <<(ostream& lhs, const Card& c) {
 	
 	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
@@ -30,6 +40,10 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 	case Card::ranks::two:
 		lhs << "Two";
 		break;
+	case Card::ranks::three:
+		lhs << "Three";
+		break;
+
 	}
 	switch (c.suit) {
 	case Card::suits::diamonds:

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1\Card.cpp" />
+    <ClCompile Include="Project1\Deck.cpp" />
     <ClCompile Include="Project1\useCard.cpp" />
   </ItemGroup>
   <ItemGroup>
