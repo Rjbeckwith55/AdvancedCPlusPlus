@@ -11,17 +11,7 @@ Card::Card(int s, int r) {
 	rank = r;
 }
 void Card::setSuit(int s) {
-	switch (s) {
-	case suits::diamonds:
-		suit = static_cast<int>(suits::diamonds);
-	case suits::clubs:
-		suit = static_cast<int>(suits::clubs);
-	case suits::hearts:
-		suit = static_cast<int>(suits::hearts);
-	case suits::spades:
-		suit = static_cast<int>(suits::spades);
-	}
-
+	suit = s;
 
 }
 
@@ -32,9 +22,44 @@ void Card::setRank(int r) {
 		rank = static_cast<int>(ranks::ace);
 	}
 }
+int Card::operator +(const int& rhs) {
+	return rank + rhs;
+}
+int Card::operator +(const Card& rhs) {
+	return rank + rhs.getRank();
+}
+int operator +(const int& lhs, const Card& rhs) {
+	return lhs + rhs.rank;
+}
 
+// Output the card rank and the card suit
 ostream& operator <<(ostream& lhs, const Card& c) {
-	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: " << static_cast<Card::suits>(c.suit) << "Card's Value: " << c.rank << endl;
+	
+	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
+	switch (c.rank) {
+	case Card::ranks::two:
+		lhs << "Two";
+		break;
+	case Card::ranks::three:
+		lhs << "Three";
+		break;
+
+	}
+	switch (c.suit) {
+	case Card::suits::diamonds:
+		lhs << "Diamonds ";
+		break;
+	case Card::suits::clubs:
+		lhs << "Clubs ";
+		break;
+	case Card::suits::hearts:
+		lhs << "Hearts ";
+		break;
+	case Card::suits::spades:
+		lhs << "Spades ";
+		break;
+	}
+		lhs << "Card's Value: " << c.rank << endl;
 	return lhs;
 
 }
