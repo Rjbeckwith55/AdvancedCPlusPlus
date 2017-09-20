@@ -23,7 +23,7 @@ public:
 	enum suits { clubs = 1, diamonds, hearts, spades };
 	enum ranks { two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace };
 	Card(int, int); //test parameterized constructor
-	//Card(); // default constructor
+	Card(); // default constructor
 
 	// getters and setters
 	void setSuit(int);

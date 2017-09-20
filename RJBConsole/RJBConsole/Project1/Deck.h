@@ -7,12 +7,13 @@ Description:
 
 
 // sequence with capacity of 52. Constructor assigns 52 cards in order of suit and rank. Friend function to display the whole deck with descriptive words
-#include "Card.h"
-#include <vector>
-#include <cstdlib>
 
 #ifndef deck_H
 #define deck_H
+#include "Card.h"
+#include <vector>
+#include <cstdlib>
+#include <ctime> 
 
 class Deck {
 public:
@@ -20,10 +21,11 @@ public:
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
 
-	friend void displayCards();
+	
 	Deck();
-
-
+	friend void displayCards(Deck);
+	void swap(int,int);
+	void shuffle();
 	
 private:
 	value_type Cards;

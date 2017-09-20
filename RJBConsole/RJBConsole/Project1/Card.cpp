@@ -34,7 +34,7 @@ int operator +(const int& lhs, const Card& rhs) {
 
 // Output the card rank and the card suit
 ostream& operator <<(ostream& lhs, const Card& c) {
-	
+
 	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
 	switch (c.rank) {
 	case Card::ranks::two:
@@ -43,7 +43,39 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 	case Card::ranks::three:
 		lhs << "Three";
 		break;
-
+	case Card::ranks::four:
+		lhs << "Four";
+		break;
+	case Card::ranks::five:
+		lhs << "Five";
+		break;
+	case Card::ranks::six:
+		lhs << "Six";
+		break;
+	case Card::ranks::seven:
+		lhs << "Seven";
+		break;
+	case Card::ranks::eight:
+		lhs << "Eight";
+		break;
+	case Card::ranks::nine:
+		lhs << "Nine";
+		break;
+	case Card::ranks::ten:
+		lhs << "Ten";
+		break;
+	case Card::ranks::jack:
+		lhs << "Jack";
+		break;
+	case Card::ranks::queen:
+		lhs << "Queen";
+		break;
+	case Card::ranks::king:
+		lhs << "King";
+		break;
+	case Card::ranks::ace:
+		lhs << "Ace5";
+		break;
 	}
 	switch (c.suit) {
 	case Card::suits::diamonds:
@@ -59,7 +91,7 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 		lhs << "Spades ";
 		break;
 	}
-		lhs << "Card's Value: " << c.rank << endl;
+	lhs << "Card's Value: " << c.rank << endl;
 	return lhs;
 
 }
