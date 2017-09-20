@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab3\sequence_test.cxx">
+    <ClCompile Include="Lab3\SequenceFixed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lab3\SequenceFixed.cpp">
+    <ClCompile Include="Lab3\sequence_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

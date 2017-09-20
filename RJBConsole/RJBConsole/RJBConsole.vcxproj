@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab3\SequenceFixed.cpp" />
-    <ClCompile Include="Lab3\sequence_test.cxx" />
+    <ClCompile Include="Lab3\sequence_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lab3\sequenceFixed.h" />
