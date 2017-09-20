@@ -38,6 +38,7 @@ Deck::Deck() {
 	}
 }
 
+// Display all the cards in the deck
 void displayCards(Deck d){
 	for (Deck::size_type i = 0; i < CAPACITY; i++)
 	{
@@ -53,6 +54,8 @@ void Deck::swap(int k,int index) {
 	Cards[k] = Cards[index];
 	Cards[index] = temp;
 }
+
+// Shuffle the deck of cards
 void Deck::shuffle() {
 	// Define the bounds of the random number
 	Deck::size_type lowest = 0, highest = 52;

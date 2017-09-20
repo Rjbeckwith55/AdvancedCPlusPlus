@@ -32,5 +32,8 @@
     <ClInclude Include="Project1\Deck.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Project1\Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

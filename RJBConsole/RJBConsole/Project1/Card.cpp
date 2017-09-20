@@ -15,19 +15,20 @@ void Card::setSuit(int s) {
 
 }
 
-
 void Card::setRank(int r) {
-	switch (r) {
-	case ranks::ace:
-		rank = static_cast<int>(ranks::ace);
-	}
+	rank = r;
 }
+
+
+// overloaded + for Card and int
 int Card::operator +(const int& rhs) {
 	return rank + rhs;
 }
+// overloaded + for Card and Card
 int Card::operator +(const Card& rhs) {
 	return rank + rhs.getRank();
 }
+// overloaded + for int and Card
 int operator +(const int& lhs, const Card& rhs) {
 	return lhs + rhs.rank;
 }
@@ -36,6 +37,7 @@ int operator +(const int& lhs, const Card& rhs) {
 ostream& operator <<(ostream& lhs, const Card& c) {
 
 	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
+	//Giant switch case to print out the rank for the card based on the rank of the specific card
 	switch (c.rank) {
 	case Card::ranks::two:
 		lhs << "Two";
@@ -77,6 +79,7 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 		lhs << "Ace5";
 		break;
 	}
+	//switch case to print out the suit for the card based on the suit of the specific card
 	switch (c.suit) {
 	case Card::suits::diamonds:
 		lhs << "Diamonds ";
