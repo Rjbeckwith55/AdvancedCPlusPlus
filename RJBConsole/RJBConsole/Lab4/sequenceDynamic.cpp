@@ -33,154 +33,182 @@ sequenceDynamic::sequenceDynamic(size_type initial_capacity) {
 
 // copy constructor ==>TO COMPLETE FOR LAB
 sequenceDynamic::sequenceDynamic(const sequenceDynamic& source) {
-	assert(current_index > used - 1);
-	current_index = source.current_index;
+
+	//allocate enough memory
+	data = new value_type[source.used];
+	// set current capacity and used from source
 	capacity = source.capacity;
 	used = source.used;
-	data = new value_type[source.capacity];
-	if (is_item()) {
-		// copy items from source to current
-		for (size_type i = 0; i < capacity; i++) {
-			data[i] = source.data[i];
-		}
-	}
-	
-
-
+	current_index = source.current_index;
+	// copy items from source to current
+	for (size_type i = 0; i < used; i++) {
+		data[i] = source.data[i];
 	}
 
-	// the destructor
-	sequenceDynamic::~sequenceDynamic() {
-		// release memory
-		delete[] data;
-	}
 
-	void sequenceDynamic::start() {
+}
+
+// the destructor
+sequenceDynamic::~sequenceDynamic() {
+	// release memory
+	delete[] data;
+}
+
+void sequenceDynamic::start() {
+	current_index = 0;
+}
+
+void sequenceDynamic::advance() {
+	// ensure that current_index is valid
+	assert(is_item());
+	current_index++;
+}
+
+// insert member function ==>TO COMPLETE FOR LAB
+void sequenceDynamic::insert(const value_type& entry) {
+
+	if (used >= capacity)
+		resize(1 + used + used / 10); // Increase by 10%
+
+	if (!is_item()) { //go back to the first item the item does not exist 
 		current_index = 0;
 	}
 
-	void sequenceDynamic::advance() {
-		// ensure that current_index is valid
-		assert(is_item());
+	for (size_type i = used; i > current_index; i--)
+	{
+		data[i] = data[i - 1];
+	}
+	data[current_index] = entry;
+	// increment the number of items used
+	used++;
+}
+void sequenceDynamic::attach(const value_type& entry) {
+	// add additional memory if at capacity
+	if (used >= capacity)
+		resize(1 + used + used / 10); // Increase by 10%
+	// If there is no current item,
+	// add item at end of sequence
+	if (!is_item())
+	{
+		current_index = used;
+		data[current_index] = entry;
+	}
+	else // There is a current item
+	{
+		// so move items over to make room
+		for (size_type i = used; i > (current_index + 1); i--)
+			data[i] = data[i - 1];
+		// insert item after current_index
+		data[current_index + 1] = entry;
+		// increment current_index
 		current_index++;
 	}
+	// increment number of items used
+	used++;
+}
 
-	// insert member function ==>TO COMPLETE FOR LAB
-	void sequenceDynamic::insert(const value_type& entry) {
+void sequenceDynamic::remove_current() {
+	// ensure that current_index is valid
+	assert(is_item());
+	// remove item at current_index by shifting items over
+	for (size_type i = current_index; i < used - 1; i++)
+		data[i] = data[i + 1];
+	// decrement number of items used
+	used--;
+}
 
-		if (used >= capacity)
-			resize(1 + used + used / 10); // Increase by 10%
+// resize member function ==>TO COMPLETE FOR LAB
+void sequenceDynamic::resize(size_type new_capacity) {
+	if (new_capacity == capacity)
+		return;
 
-		if (!is_item()) { //go back to the first item the item does not exist 
-			current_index = 0;
-		}
+	// Can’t allocate less than we are using.
+	if (new_capacity < used)
+		new_capacity = used;
 
-		for (size_type i = used; i > current_index; i--)
-		{
-			data[i] = data[i - 1];
-		}
-		data[current_index] = entry;
-		// increment the number of items used
-		used++;
+	// allocate memory for larger capacity
+	value_type *larger_array = new value_type[new_capacity];
+
+	// copy items from current to larger array
+	for (size_type i = 0; i < used; ++i)
+		larger_array[i] = data[i];
+
+	// release old data, reassign data pointer, and reset capacity
+	delete[] data;
+	data = larger_array;
+	capacity = new_capacity;
+
+}
+
+// overloaded assignment operator ==>TO COMPLETE FOR LAB
+void sequenceDynamic::operator =(const sequenceDynamic& source) {
+	if (this == &source)
+		return;
+
+	// add additional memory if at capacity
+	if (this->capacity <= source.capacity)
+		resize(source.capacity); // Increase size
+
+	// set the number used from the source
+	used = source.used;
+	current_index = source.current_index;
+	// copy over items from source to current
+	for (size_type i = 0; i < used; i++) {
+		data[i] = source.data[i];
 	}
-	void sequenceDynamic::attach(const value_type& entry) {
-		// add additional memory if at capacity
-		if (used >= capacity)
-			resize(1 + used + used / 10); // Increase by 10%
-		// If there is no current item,
-		// add item at end of sequence
-		if (!is_item())
-		{
-			current_index = used;
-			data[current_index] = entry;
-		}
-		else // There is a current item
-		{
-			// so move items over to make room
-			for (size_type i = used; i > (current_index + 1); i--)
-				data[i] = data[i - 1];
-			// insert item after current_index
-			data[current_index + 1] = entry;
-			// increment current_index
-			current_index++;
-		}
-		// increment number of items used
-		used++;
-	}
+}
 
-	void sequenceDynamic::remove_current() {
-		// ensure that current_index is valid
-		assert(is_item());
-		// remove item at current_index by shifting items over
-		for (size_type i = current_index; i < used - 1; i++)
-			data[i] = data[i + 1];
-		// decrement number of items used
-		used--;
-	}
+sequenceDynamic::size_type sequenceDynamic::size() const {
+	return used;
+}
 
-	// resize member function ==>TO COMPLETE FOR LAB
-	void sequenceDynamic::resize(size_type new_capacity) {
-		// allocate the correct amount of memory
+bool sequenceDynamic::is_item() const {
+	// see if current_index is valid
+	return (current_index < used);
+}
 
-		if (capacity < new_capacity) {
-			delete[] data;
-			data = new value_type[new_capacity];
-			capacity = new_capacity;
-		}
+sequenceDynamic::value_type sequenceDynamic::current() const {
+	// ensure that current_index is valid
+	assert(is_item());
+	return data[current_index];
+}
 
+sequenceDynamic operator +(const sequenceDynamic& s1, const sequenceDynamic& s2) {
+	// create new bagDynamic with size equal to sum of both bagDynamic parameters
+	sequenceDynamic result(s1.size() + s2.size());
+	// add items from first sequenceDynamic
+	result += s1;
+	// add items from first sequenceDynamic
+	result += s2;
+	return result;
+}
 
-	}
-
-	// overloaded assignment operator ==>TO COMPLETE FOR LAB
-	void sequenceDynamic::operator =(const sequenceDynamic& source) {
-		if (this == &source)
-			return;
-
-		// add additional memory if at capacity
-		if (this->capacity <= source.capacity)
-			resize(source.capacity); // Increase size
-
-		// set the number used from the source
-		used = source.used;
-		current_index = source.current_index;
-		// copy over items from source to current
-		for (size_type i = 0; i < used; i++) {
-			data[i] = source.data[i];
-		}
-	}
-
-	sequenceDynamic::size_type sequenceDynamic::size() const {
-		return used;
-	}
-
-	bool sequenceDynamic::is_item() const {
-		// see if current_index is valid
-		return (current_index < used);
-	}
-
-	sequenceDynamic::value_type sequenceDynamic::current() const {
-		// ensure that current_index is valid
-		assert(is_item());
-		return data[current_index];
-	}
-
-	sequenceDynamic operator +(const sequenceDynamic& s1, const sequenceDynamic& s2) {
-		// create new bagDynamic with size equal to sum of both bagDynamic parameters
-		sequenceDynamic result(s1.size() + s2.size());
-		// add items from first sequenceDynamic
-		result += s1;
-		// add items from first sequenceDynamic
-		result += s2;
-		return result;
-	}
-
-	void sequenceDynamic::operator +=(const sequenceDynamic& addend) {
-		// see if additional memory needed
-		if ((used + addend.used) > capacity)
-			resize(used + addend.used);
-		// copy items from addend to current
-		size_type addUsed = addend.used;
-		for (size_type i = 0; i < addUsed; ++i)
-			data[used++] = addend.data[i];
-	}
-
+void sequenceDynamic::operator +=(const sequenceDynamic& addend) {
+	// see if additional memory needed
+	if ((used + addend.used) > capacity)
+		resize(used + addend.used);
+	// copy items from addend to current
+	size_type addUsed = addend.used;
+	for (size_type i = 0; i < addUsed; ++i)
+		data[used++] = addend.data[i];
+}
+/* 
+==========>TEST RESULTS<========= =
+If you submit this sequenceDynamic class now, you will have
+30 points out of the 30 points from this test program.
+==========>POINT SUMMARY<========= =
+Testing insert, attach, and the constant member functions
+POINTS = 6 out of 6
+Testing situations where the cursor goes off the sequenceDynamic
+POINTS = 3 out of 3
+Testing remove_current
+POINTS = 0 out of 0
+Testing the resize member function
+POINTS = 6 out of 6
+Testing the copy constructor
+POINTS = 6 out of 6
+Testing the assignment operator
+POINTS = 6 out of 6
+Testing insert / attach when current DEFAULT_CAPACITY exceeded
+POINTS = 3 out of 3
+Press any key to continue . . .*/
