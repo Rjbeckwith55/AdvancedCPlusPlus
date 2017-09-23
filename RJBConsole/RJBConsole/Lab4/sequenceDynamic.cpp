@@ -1,4 +1,7 @@
-// FILE:              sequenceDynamic.cpp
+/// Robert Beckwith
+// 9/22/2017
+// CIS 2542
+//FILE:              sequenceDynamic.cpp
 // CLASS IMPLEMENTED: sequenceDynamic (See sequenceDynamic.h for documentation)
 // INVARIANT for the sequenceDynamic ADT (i.e. verbalization of rules governing
 //   private member function behavior):
