@@ -10,15 +10,15 @@ Description:
 from previous Programming Projects. Create a player class to hold a hand of dealt cards. During each turn, a player will discard a card.
 Use rand( ) to determine who gets the first turn in each hand, and make sure each person has a turn during every hand. The program ends when all cards have been played.*/
 #include "Deck.h"
+#include "Card.h"
 
 class Player {
 private:
 	string name;
-	vector<Card> hand[13];
+	Card hand[13];
 public:
 	string getName() { return name; }
 	void setName(string s);
-	void addCard(int index);
 	friend class Deck;
 	
 	

@@ -22,7 +22,7 @@
     <ClCompile Include="Project1\Card.cpp" />
     <ClCompile Include="Project1\Deck.cpp" />
     <ClCompile Include="Project1\Player.cpp" />
-    <ClCompile Include="Project1\useCard.cpp" />
+    <ClCompile Include="Project1\Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project1\Card.h" />

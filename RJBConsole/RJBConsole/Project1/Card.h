@@ -7,6 +7,7 @@ Description:
 
 #include <iostream>
 #include <ostream>
+#include <string>
 using namespace std;
 
 #ifndef card_H

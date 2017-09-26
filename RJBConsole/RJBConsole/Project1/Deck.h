@@ -21,13 +21,11 @@ public:
 	using value_type = vector<Card>;
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
-
-	
 	Deck();
 	friend void displayCards(Deck);
 	void swap(int,int);
 	void shuffle();
-	void deal(Player, Player, Player, Player);
+	static void deal(Player&, Player&, Player&, Player&);
 
 	
 private:

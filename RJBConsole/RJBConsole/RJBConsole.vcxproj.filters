@@ -21,10 +21,10 @@
     <ClCompile Include="Project1\Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Project1\useCard.cpp">
+    <ClCompile Include="Project1\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Project1\Player.cpp">
+    <ClCompile Include="Project1\Simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
