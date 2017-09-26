@@ -19,11 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab4\sequenceDynamic.cpp" />
-    <ClCompile Include="Lab4\sequenceDynamic_exam.cxx" />
+    <ClCompile Include="Project1\Card.cpp" />
+    <ClCompile Include="Project1\Deck.cpp" />
+    <ClCompile Include="Project1\Player.cpp" />
+    <ClCompile Include="Project1\useCard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab4\sequenceDynamic.h" />
+    <ClInclude Include="Project1\Card.h" />
+    <ClInclude Include="Project1\Deck.h" />
+    <ClInclude Include="Project1\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E09FF7BB-0926-4110-B7F9-E1DB10F83700}</ProjectGuid>

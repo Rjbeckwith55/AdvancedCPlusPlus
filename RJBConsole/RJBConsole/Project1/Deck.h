@@ -11,6 +11,7 @@ Description:
 #ifndef deck_H
 #define deck_H
 #include "Card.h"
+#include "Player.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime> 
@@ -26,6 +27,8 @@ public:
 	friend void displayCards(Deck);
 	void swap(int,int);
 	void shuffle();
+	void deal(Player, Player, Player, Player);
+
 	
 private:
 	value_type Cards;

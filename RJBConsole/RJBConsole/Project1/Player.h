@@ -12,6 +12,16 @@ Use rand( ) to determine who gets the first turn in each hand, and make sure eac
 #include "Deck.h"
 
 class Player {
-
+private:
+	string name;
+	vector<Card> hand[13];
+public:
+	string getName() { return name; }
+	void setName(string s);
+	void addCard(int index);
+	friend class Deck;
+	
+	
+	
 };
 #endif

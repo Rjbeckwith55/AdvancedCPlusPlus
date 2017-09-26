@@ -15,15 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab4\sequenceDynamic.cpp">
+    <ClCompile Include="Project1\Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lab4\sequenceDynamic_exam.cxx">
+    <ClCompile Include="Project1\Deck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project1\useCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project1\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab4\sequenceDynamic.h">
+    <ClInclude Include="Project1\Card.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project1\Deck.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project1\Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
