@@ -25,7 +25,7 @@ public:
 	friend void displayCards(Deck);
 	void swap(int,int);
 	void shuffle();
-	static void deal(Player&, Player&, Player&, Player&);
+	void deal(Deck);
 
 	
 private:

@@ -72,13 +72,14 @@ void Deck::shuffle() {
 	
 
 }
- void Deck::deal(Player& p1, Player& p2, Player& p3, Player& p4) {
+ void Deck::deal(Deck d) {
+	 Player p;
 	for (size_t i = 0; i < 52; i+4)
 	{
-		p1.hand[i] = Cards[i];
-		p2.hand[i] = Cards[i+ 1];
-		p3.hand[i] = Cards[i + 2];
-		p4.hand[i] = Cards[i + 3];
+		p.addCard(d.Cards[i],p);
+		//p2.hand[i] = Cards[i+ 1];
+		//p3.hand[i] = Cards[i + 2];
+		//p4.hand[i] = Cards[i + 3];
 
 	}
 }

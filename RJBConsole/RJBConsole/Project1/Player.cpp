@@ -10,3 +10,6 @@ Description:
 void Player::setName(string s) {
 	name = s; 
 }
+void Player::addCard(Card card,Player& p) {
+	p.hand.push_back(card);
+}

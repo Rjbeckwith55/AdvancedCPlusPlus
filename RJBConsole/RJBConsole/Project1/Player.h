@@ -19,6 +19,7 @@ private:
 public:
 	string getName() { return name; }
 	void setName(string s);
+	void addCard(Card, Player&);
 	friend class Deck;
 	
 	
