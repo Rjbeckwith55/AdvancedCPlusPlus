@@ -124,11 +124,12 @@
 #ifndef MAIN_SAVITCH_NODE_H
 #define MAIN_SAVITCH_NODE_H
 #include <cstdlib> // Provides size_t
+#include "Player.h"
 
 class node {
 public:
 	// ALIAS
-	using value_type = double;
+	using value_type = double ;
 	// CONSTRUCTOR
 	node(const value_type& init_data = value_type(),
 		node* init_link = nullptr) {

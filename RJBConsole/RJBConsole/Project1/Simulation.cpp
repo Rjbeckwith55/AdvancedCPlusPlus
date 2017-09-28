@@ -11,6 +11,8 @@ Description:
 
 int main() {
 	Player p1, p2, p3, p4;
+	//node *ptr1 = new node(p1);
+	//node *p2 = new node(p2);
 	Deck deck;
 	Card c;
 	string name1,name2,name3,name4;
@@ -18,7 +20,10 @@ int main() {
 	name2 = "Player 2";
 	name3 = "Player 3";
 	name4 = "Player 4";
-
+	p1.setName(name1);
+	p2.setName(name2);
+	p3.setName(name3);
+	p4.setName(name4);
 	/*cout << "Enter in the first Player's name: ";
 	cin >> name1;
 	p1.setName(name1);
@@ -30,13 +35,14 @@ int main() {
 	cout << "Enter in the fourth Player's name: ";
 	cin >> name4;*/
 
-	p1.setName(name1);
-	p2.setName(name2);
-	p3.setName(name3);
-	p4.setName(name4);
+	// shuffle the deck
 	deck.shuffle();
 	//display all the cards in the deck
 	displayCards(deck);
+
+
+	
+
 
 	// Needs a linked list that will pick a random link and will discard a card for each one.
 	p1.deal(p1, p2, p3, p4, deck);
