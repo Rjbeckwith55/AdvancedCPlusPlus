@@ -54,7 +54,7 @@ void Deck::swap(int k,int index) {
 // Shuffle the deck of cards
 void Deck::shuffle() {
 	// Define the bounds of the random number
-	const Deck::size_type MIN_VALUE = 0, MAX_VALUE = 52;
+	const Deck::size_type MIN_VALUE = 0, MAX_VALUE = 51;
 
 	// generate a random seed off of time
 	unsigned seed = time(0);

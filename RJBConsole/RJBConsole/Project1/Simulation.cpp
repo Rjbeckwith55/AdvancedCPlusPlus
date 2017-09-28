@@ -38,9 +38,11 @@ int main() {
 	//display all the cards in the deck
 	displayCards(deck);
 
+	// Needs a linked list that will pick a random link and will discard a card for each one.
 	p1.deal(p1, p2, p3, p4, deck);
-	cout << "Player one's hand: "<<endl;
+	cout << p1.getName()<<"'s hand"<<endl;
 	showHand(p1);
+	cout << p1.getName() << "'s hand" << getValue(p1) << endl;
 	cout << "Player two's hand: " << endl;
 	showHand(p2);
 	cout << "Player three's hand: " << endl;
