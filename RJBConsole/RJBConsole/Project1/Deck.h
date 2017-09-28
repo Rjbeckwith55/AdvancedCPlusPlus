@@ -21,19 +21,23 @@ public:
 	using value_type = Card;
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
-	Deck();
-	friend void displayCards(Deck);
-	Card getCard(Deck, int);
-	void swap(int,int);
-	void shuffle();
-	//void deal(Deck);
 
+	Deck(); // default constructor
+
+	//displays all the cards in the deck
+	friend void displayCards(Deck);
+
+	// gets a specific card at a specific index used in the deal function
+	Card getCard(Deck, int);
+
+	//swaps two cards
+	void swap(int,int);
+
+	//goes through 1 through 52 and swaps each card with a random other card
+	void shuffle();
 	
 private:
-	value_type Cards[CAPACITY];
-	// number of items stored
-	size_type used;
-	// current item's reference
-	size_type current_index;
+	// array to hold all the cards in the deck 
+	value_type Cards[CAPACITY]; // The deck
 };
 #endif
