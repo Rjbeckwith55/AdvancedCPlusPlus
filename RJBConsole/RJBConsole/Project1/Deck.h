@@ -23,9 +23,10 @@ public:
 	static const size_type CAPACITY = 52;
 	Deck();
 	friend void displayCards(Deck);
+	Card getCard(Deck, int);
 	void swap(int,int);
 	void shuffle();
-	void deal(Deck);
+	//void deal(Deck);
 
 	
 private:

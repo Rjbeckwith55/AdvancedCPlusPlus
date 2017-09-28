@@ -40,7 +40,6 @@ int operator +(const int& lhs, const Card& rhs) {
 // Output the card rank and the card suit
 ostream& operator <<(ostream& lhs, const Card& c) {
 
-	lhs << "Card Rank: ";
 	//Giant switch case to print out the rank for the card based on the rank of the specific card
 	switch (c.rank) {
 	case Card::ranks::two:
@@ -83,7 +82,7 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 		lhs << "Ace";
 		break;
 	}
-	lhs << " Card Suit: ";
+	lhs << " Of ";
 	//switch case to print out the suit for the card based on the suit of the specific card
 	switch (c.suit) {
 	case Card::suits::diamonds:

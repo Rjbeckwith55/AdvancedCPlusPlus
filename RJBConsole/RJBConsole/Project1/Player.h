@@ -12,15 +12,23 @@ Use rand( ) to determine who gets the first turn in each hand, and make sure eac
 #include "Deck.h"
 #include "Card.h"
 #include <vector>
-
+class Deck;
 class Player {
 private:
 	string name;
 	vector<Card> hand;
+
 public:
+	Player();
+	using size_type = std::size_t;
+	static const size_type HAND_SIZE = 13;
 	string getName() { return name; }
 	void setName(string s);
+	void deal(Player&, Player&, Player&, Player&, Deck);
+	friend void showHand(Player p);
 	friend void addCard(Card, Player);
+	friend Card discard(Player&);
+
 	friend class Deck;
 	
 	
