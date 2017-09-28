@@ -6,6 +6,10 @@ Description:
 	Implementation file for the Card class*/
 
 #include "Card.h"
+Card::Card() {
+	suit = int();
+	rank = int();
+}
 Card::Card(int s, int r) {
 	suit = s;
 	rank = r;
@@ -36,7 +40,7 @@ int operator +(const int& lhs, const Card& rhs) {
 // Output the card rank and the card suit
 ostream& operator <<(ostream& lhs, const Card& c) {
 
-	lhs << "Card Rank: " << static_cast<Card::ranks>(c.rank) << "Card Suit: ";
+	lhs << "Card Rank: ";
 	//Giant switch case to print out the rank for the card based on the rank of the specific card
 	switch (c.rank) {
 	case Card::ranks::two:
@@ -76,9 +80,10 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 		lhs << "King";
 		break;
 	case Card::ranks::ace:
-		lhs << "Ace5";
+		lhs << "Ace";
 		break;
 	}
+	lhs << " Card Suit: ";
 	//switch case to print out the suit for the card based on the suit of the specific card
 	switch (c.suit) {
 	case Card::suits::diamonds:
@@ -94,7 +99,7 @@ ostream& operator <<(ostream& lhs, const Card& c) {
 		lhs << "Spades ";
 		break;
 	}
-	lhs << "Card's Value: " << c.rank << endl;
+	lhs << " Card's Value: " << c.rank << endl;
 	return lhs;
 
 }

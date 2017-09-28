@@ -7,9 +7,10 @@ Description:
 
 #include "Player.h"
 
+
 void Player::setName(string s) {
 	name = s; 
 }
-void Player::addCard(Card card,Player& p) {
+void addCard(Card card,Player p) {
 	p.hand.push_back(card);
 }

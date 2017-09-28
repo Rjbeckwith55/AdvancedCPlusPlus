@@ -18,7 +18,7 @@ Description:
 
 class Deck {
 public:
-	using value_type = vector<Card>;
+	using value_type = Card;
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
 	Deck();
@@ -29,7 +29,7 @@ public:
 
 	
 private:
-	value_type Cards;
+	value_type Cards[CAPACITY];
 	// number of items stored
 	size_type used;
 	// current item's reference

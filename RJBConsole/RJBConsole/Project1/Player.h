@@ -11,15 +11,16 @@ from previous Programming Projects. Create a player class to hold a hand of deal
 Use rand( ) to determine who gets the first turn in each hand, and make sure each person has a turn during every hand. The program ends when all cards have been played.*/
 #include "Deck.h"
 #include "Card.h"
+#include <vector>
 
 class Player {
 private:
 	string name;
-	Card hand[13];
+	vector<Card> hand;
 public:
 	string getName() { return name; }
 	void setName(string s);
-	void addCard(Card, Player&);
+	friend void addCard(Card, Player);
 	friend class Deck;
 	
 	

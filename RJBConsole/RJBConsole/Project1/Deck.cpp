@@ -7,17 +7,7 @@ Implementation file for the Deck class*/
 
 #include "Deck.h"
 
-
-
 using namespace std;
-
-int main()
-{
-	srand((unsigned)time(0));
-	int random_integer = rand();
-	cout << random_integer << endl;
-}
-
 
 const Deck::size_type CAPACITY = 52;
 
@@ -67,16 +57,19 @@ void Deck::shuffle() {
 	{
 		srand((unsigned)time(0));
 		k = lowest + int(range*rand() / (RAND_MAX + 1.0));
-		swap(k, index);
+		Deck::swap(k, index);
 	}
 	
 
 }
  void Deck::deal(Deck d) {
-	 Player p;
-	for (size_t i = 0; i < 52; i+4)
+	 Player p1;
+	 Player p2;
+	 Player p3;
+	 Player p4;
+	for (size_t i = 0; i < 52; i+=4)
 	{
-		p.addCard(d.Cards[i],p);
+		addCard(d.Cards[i],p1);
 		//p2.hand[i] = Cards[i+ 1];
 		//p3.hand[i] = Cards[i + 2];
 		//p4.hand[i] = Cards[i + 3];
