@@ -26,7 +26,7 @@ using namespace std;
 // not including end_ptr.  The end_ptr may also be nullptr, in which case
 // the new list contains elements from start_ptr to the end of the list.
 // Library facilities used: cstdlib
-void list_piece(const node* start_ptr, const node* end_ptr, node*& head_ptr, 
+void list_piece(const node* start_ptr, const node* end_ptr, node*& head_ptr,
 	node*& tail_ptr) {
 
 	head_ptr = nullptr;
@@ -58,7 +58,13 @@ sequenceList::sequenceList() {
 
 // copy constructor ==>TO COMPLETE FOR LAB
 sequenceList::sequenceList(const sequenceList& source) {
-
+	// Library facilities used: node.h  
+	if (head_ptr == nullptr)
+		return;
+	tail_ptr = source.tail_ptr;	list_copy(source.head_ptr, head_ptr, tail_ptr);
+	many_nodes = source.many_nodes;
+	cursor = source.cursor;
+	precursor = source.precursor;
 }
 
 // the destructor
@@ -102,17 +108,55 @@ void sequenceList::insert(const value_type& entry) {
 
 // method to attach item after cursor ==>TO COMPLETE FOR LAB
 void sequenceList::attach(const value_type& entry) {
+	if (cursor == nullptr) {
+		if (head_ptr == nullptr) {
+			insert(entry);// will make tail = head
+			if(tail_ptr->link())
+				tail_ptr = tail_ptr->link();
+		}
+		else {
+			list_insert(tail_ptr, entry);
+			precursor = tail_ptr;
+			tail_ptr = tail_ptr->link();
+			cursor = tail_ptr;
+			if (head_ptr == nullptr)
+				head_ptr = tail_ptr; //shouldn't ever run
+			++many_nodes;
+		}
 
+	}
+	else
+	{
+		list_insert(cursor, entry);
+		precursor = cursor;
+		cursor = cursor->link();
+
+		while (tail_ptr->link()!=nullptr) // set the tail ptr to the last pointer
+			tail_ptr = tail_ptr->link();
+		++many_nodes;
+	}
+	
 }
 
 // method to remove item at cursor ==>TO COMPLETE FOR LAB
 void sequenceList::remove_current() {
+	if (cursor == nullptr)
+		return; // target isn't in the bagList, so no work to do
 
+	list_remove(precursor);
+	--many_nodes;
 }
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
 void sequenceList::operator =(const sequenceList& source) {
+	// check for possible self assignment
+	if (this == &source)
+		return;
 
+	//clear the old list
+	list_clear(head_ptr);
+	list_copy(source.head_ptr, head_ptr, tail_ptr);
+	many_nodes = source.many_nodes;
 }
 
 // method to return item at cursor
