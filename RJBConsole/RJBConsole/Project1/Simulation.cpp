@@ -6,15 +6,21 @@ Description:
 			Simulation program to pick a random player and discard the cards*/
 
 #include "Player.h"
-
+#include "node.h"
 
 
 int main() {
 	Player p1, p2, p3, p4;
-	//node *ptr1 = new node(p1);
-	//node *p2 = new node(p2);
 	Deck deck;
 	Card c;
+
+	// create the pointer nodes
+	node *head_ptr = new node(p1);
+	node *ptr2 = new node(p2);
+	node *ptr3 = new node(p3);
+	node *tail_ptr = new node(p4);
+	head_ptr->set_link(ptr2);
+	
 	string name1,name2,name3,name4;
 	name1 = "Player 1";
 	name2 = "Player 2";
@@ -41,11 +47,12 @@ int main() {
 	displayCards(deck);
 
 
-	
-
 
 	// Needs a linked list that will pick a random link and will discard a card for each one.
-	p1.deal(p1, p2, p3, p4, deck);
+
+	//Deal out the cards to each of the 4 players
+	deal(p1, p2, p3, p4, deck);
+
 	cout << p1.getName()<<"'s hand"<<endl;
 	showHand(p1);
 	cout << p1.getName() << "'s hand" << getValue(p1) << endl;

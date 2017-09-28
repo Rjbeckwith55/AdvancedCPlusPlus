@@ -10,7 +10,7 @@ Description:
 from previous Programming Projects. Create a player class to hold a hand of dealt cards. During each turn, a player will discard a card.
 Use rand( ) to determine who gets the first turn in each hand, and make sure each person has a turn during every hand. The program ends when all cards have been played.*/
 #include "Deck.h"
-#include "node.h"
+
 #include <vector>
 
 class Deck;  // something to fix "identifier error"
@@ -33,7 +33,7 @@ public:
 	void setName(string s); // setter
 
 	//deal the cards out to each of the players in the game
-	void deal(Player&, Player&, Player&, Player&, Deck);
+	friend void deal(Player&, Player&, Player&, Player&, Deck);
 
 	//print out each players hand currently can only print when the hand is full
 	friend void showHand(Player p);

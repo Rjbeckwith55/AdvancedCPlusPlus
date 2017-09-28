@@ -7,6 +7,7 @@ Description:
 
 #include "Player.h"
 
+
 static const Player::size_type HAND_SIZE = 13;
 
 
@@ -28,7 +29,7 @@ void showHand(Player p) {
 }
 
 //deal 14 cards out to each player
-void Player::deal(Player& p1, Player& p2, Player& p3, Player& p4, Deck d) {
+void deal(Player& p1, Player& p2, Player& p3, Player& p4, Deck d) {
 	for (size_t i = 0; i < (HAND_SIZE *4); i += 4)
 	{
 		//add a car to the hand vector using the get card function with an index off by 4 each time

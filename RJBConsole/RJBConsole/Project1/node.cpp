@@ -36,24 +36,24 @@ void list_insert(node* previous_ptr, const node::value_type& entry) {
 }
 
 // search list for given item, return node pointer to first found item or nullptr
-node* list_search(node* head_ptr, const node::value_type& target) {
-	node *cursor;
-
-	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
-		if (target == cursor->data())
-			return cursor;
-	return nullptr;
-}
+//node* list_search(node* head_ptr, const node::value_type& target) {
+//	node *cursor;
+//
+//	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
+//		if (target == cursor->data())
+//			return cursor;
+//	return nullptr;
+//}
 
 // search list for given item, return constant node pointer to first found item or nullptr
-const node* list_search(const node* head_ptr, const node::value_type& target) {
-	const node *cursor;
-
-	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
-		if (target == cursor->data())
-			return cursor;
-	return nullptr;
-}
+//const node* list_search(const node* head_ptr, const node::value_type& target) {
+//	const node *cursor;
+//
+//	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
+//		if (target == cursor->data())
+//			return cursor;
+//	return nullptr;
+//}
 
 // locate node at given position and return node pointer or nullptr
 node* list_locate(node* head_ptr, size_t position) {

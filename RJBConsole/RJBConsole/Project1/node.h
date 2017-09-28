@@ -129,7 +129,7 @@
 class node {
 public:
 	// ALIAS
-	using value_type = double ;
+	using value_type = Player ;
 	// CONSTRUCTOR
 	node(const value_type& init_data = value_type(),
 		node* init_link = nullptr) {
