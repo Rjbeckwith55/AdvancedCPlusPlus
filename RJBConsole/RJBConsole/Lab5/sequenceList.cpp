@@ -61,7 +61,10 @@ sequenceList::sequenceList(const sequenceList& source) {
 	// Library facilities used: node.h  
 	if (head_ptr == nullptr)
 		return;
-	tail_ptr = source.tail_ptr;	list_copy(source.head_ptr, head_ptr, tail_ptr);
+	if (tail_ptr == nullptr)
+		return;
+	
+	list_copy(source.head_ptr, head_ptr, tail_ptr);
 	many_nodes = source.many_nodes;
 	cursor = source.cursor;
 	precursor = source.precursor;
@@ -110,14 +113,15 @@ void sequenceList::insert(const value_type& entry) {
 void sequenceList::attach(const value_type& entry) {
 	if (cursor == nullptr) {
 		if (head_ptr == nullptr) {
+
 			insert(entry); // will make tail = head
 			if(tail_ptr->link())
 				tail_ptr = tail_ptr->link();
 		}
 		else {
-			list_insert(cursor, entry);
 			precursor = tail_ptr;
-			tail_ptr = tail_ptr->link();
+			list_insert(tail_ptr, entry);
+			tail_ptr = tail_ptr->link();  // set the tail pointer because it won't be set in the insert
 			cursor = tail_ptr;
 			if (head_ptr == nullptr)
 				head_ptr = tail_ptr; //shouldn't ever run
@@ -127,7 +131,7 @@ void sequenceList::attach(const value_type& entry) {
 	}
 	else
 	{
-		list_insert(precursor, entry);
+		list_insert(cursor, entry); // list_insert asks for the cursor before the one that will be inserted.
 		cursor = cursor->link();
 
 		while (tail_ptr->link()!=nullptr) // set the tail ptr to the last pointer
@@ -141,11 +145,12 @@ void sequenceList::attach(const value_type& entry) {
 void sequenceList::remove_current() {
 	if (cursor == nullptr)
 		return; // target isn't in the sequence, so no work to do
-	if (many_nodes == 1) { // blank sequence
+	if (many_nodes == 1) { // will become blank sequence
 		start();
 		list_clear(head_ptr);
-		tail_ptr = nullptr;
 		precursor = nullptr;
+		head_ptr = nullptr;
+		tail_ptr = nullptr;
 		cursor = nullptr;
 	}
 	else {
@@ -156,12 +161,15 @@ void sequenceList::remove_current() {
 		else {
 			cursor = nullptr;
 		}
+		
 	}
 	
 
 
 	many_nodes--;
-
+	if (many_nodes == 1) {
+		precursor = nullptr;
+	}
 }
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
