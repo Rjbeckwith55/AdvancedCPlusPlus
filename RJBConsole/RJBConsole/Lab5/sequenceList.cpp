@@ -110,12 +110,12 @@ void sequenceList::insert(const value_type& entry) {
 void sequenceList::attach(const value_type& entry) {
 	if (cursor == nullptr) {
 		if (head_ptr == nullptr) {
-			insert(entry);// will make tail = head
+			insert(entry); // will make tail = head
 			if(tail_ptr->link())
 				tail_ptr = tail_ptr->link();
 		}
 		else {
-			list_insert(tail_ptr, entry);
+			list_insert(cursor, entry);
 			precursor = tail_ptr;
 			tail_ptr = tail_ptr->link();
 			cursor = tail_ptr;
@@ -127,8 +127,7 @@ void sequenceList::attach(const value_type& entry) {
 	}
 	else
 	{
-		list_insert(cursor, entry);
-		precursor = cursor;
+		list_insert(precursor, entry);
 		cursor = cursor->link();
 
 		while (tail_ptr->link()!=nullptr) // set the tail ptr to the last pointer
@@ -141,10 +140,28 @@ void sequenceList::attach(const value_type& entry) {
 // method to remove item at cursor ==>TO COMPLETE FOR LAB
 void sequenceList::remove_current() {
 	if (cursor == nullptr)
-		return; // target isn't in the bagList, so no work to do
+		return; // target isn't in the sequence, so no work to do
+	if (many_nodes == 1) { // blank sequence
+		start();
+		list_clear(head_ptr);
+		tail_ptr = nullptr;
+		precursor = nullptr;
+		cursor = nullptr;
+	}
+	else {
+		cursor = cursor->link();
+		list_remove(precursor);
+		if (precursor->link() != nullptr)
+			cursor = precursor->link();
+		else {
+			cursor = nullptr;
+		}
+	}
+	
 
-	list_remove(precursor);
-	--many_nodes;
+
+	many_nodes--;
+
 }
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
@@ -155,7 +172,10 @@ void sequenceList::operator =(const sequenceList& source) {
 
 	//clear the old list
 	list_clear(head_ptr);
+	tail_ptr = nullptr;
 	list_copy(source.head_ptr, head_ptr, tail_ptr);
+	cursor = source.cursor;
+	precursor = source.precursor;
 	many_nodes = source.many_nodes;
 }
 
