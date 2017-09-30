@@ -277,3 +277,21 @@ sequenceList::value_type sequenceList::current() const {
 	assert(is_item());
 	return cursor->data();
 }
+/*
+==========>TEST RESULTS<========= =
+If you submit this sequenceList class now, you will have
+30 points out of the 30 points from this test program.
+==========>POINT SUMMARY<========= =
+Testing insert, attach, and the constant member functions
+POINTS = 5 out of 5
+Testing situations where the cursor goes off the sequenceList
+POINTS = 5 out of 5
+Testing remove_current
+POINTS = 6 out of 6
+Testing the copy constructor
+POINTS = 5 out of 5
+Testing the assignment operator
+POINTS = 5 out of 5
+Testing insert / attach for somewhat larger sequenceLists
+POINTS = 4 out of 4
+Press any key to continue . . .*/
