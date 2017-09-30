@@ -58,16 +58,46 @@ sequenceList::sequenceList() {
 
 // copy constructor ==>TO COMPLETE FOR LAB
 sequenceList::sequenceList(const sequenceList& source) {
-	// Library facilities used: node.h  
-	if (head_ptr == nullptr)
+
+	if (this == &source) { // check if the lists are the same
 		return;
-	if (tail_ptr == nullptr)
+	}
+	if (source.many_nodes == 0) { // blank list
+		cursor = nullptr;
+		head_ptr = nullptr;
+		precursor = nullptr;
+		tail_ptr = nullptr;
+		many_nodes = 0;
 		return;
-	
-	list_copy(source.head_ptr, head_ptr, tail_ptr);
+	}
+	else if (source.many_nodes == 1) { // copy the one item over
+		list_copy(source.head_ptr, head_ptr, tail_ptr);
+		start(); // go back to the front cursor = head and precursor = null
+	}
+	else {
+		if (source.cursor == nullptr) {
+			list_copy(source.head_ptr, head_ptr, tail_ptr);  // current item is at the end of the list
+			cursor = nullptr;
+			precursor = nullptr;
+		}
+		else if (source.precursor == nullptr && source.cursor != nullptr) { // current item is the first item
+			list_copy(source.head_ptr, head_ptr, tail_ptr);
+			start();
+		}
+		else {
+			list_copy(source.precursor, head_ptr, tail_ptr); // insert the nodes after the precursor
+			cursor = head_ptr->link(); // set the cursor after the precursor
+			precursor = head_ptr; //set the head of this list to the precursor
+
+			value_type nodes_left = source.many_nodes - list_length(head_ptr); // see how many items are left to copy over
+			for (nodes_left; nodes_left > 0; nodes_left--) { // copy remaining items starting from the start of the previous list and adding them onto the front
+				list_head_insert(head_ptr, (list_locate(source.head_ptr, nodes_left))->data());
+			}
+		}
+
+
+	}
 	many_nodes = source.many_nodes;
-	cursor = source.cursor;
-	precursor = source.precursor;
 }
 
 // the destructor
@@ -111,65 +141,88 @@ void sequenceList::insert(const value_type& entry) {
 
 // method to attach item after cursor ==>TO COMPLETE FOR LAB
 void sequenceList::attach(const value_type& entry) {
-	if (cursor == nullptr) {
-		if (head_ptr == nullptr) {
 
-			insert(entry); // will make tail = head
-			if(tail_ptr->link())
-				tail_ptr = tail_ptr->link();
-		}
-		else {
-			precursor = tail_ptr;
-			list_insert(tail_ptr, entry);
-			tail_ptr = tail_ptr->link();  // set the tail pointer because it won't be set in the insert
-			cursor = tail_ptr;
-			if (head_ptr == nullptr)
-				head_ptr = tail_ptr; //shouldn't ever run
-			++many_nodes;
-		}
-
+	if (many_nodes == 0) { // if not any nodes a node is added
+		list_head_insert(head_ptr, entry); // the new item becomes the first one in the list
+		cursor = head_ptr;
+		precursor = nullptr;
+		tail_ptr = head_ptr;
+		many_nodes++;
 	}
-	else
-	{
-		list_insert(cursor, entry); // list_insert asks for the cursor before the one that will be inserted.
-		cursor = cursor->link();
-
-		while (tail_ptr->link()!=nullptr) // set the tail ptr to the last pointer
+	else {
+		if (cursor == nullptr) {
+			cursor = tail_ptr; // move cursor back temporarily for the attatch function if the cursor is at the back
+		}
+		list_insert(cursor, entry); // insert the item at the back of the current item
+		precursor = cursor; // move precursor forward 1
+		cursor = cursor->link(); // move cursort to the new item
+		many_nodes++;
+		while (tail_ptr->link() != nullptr) // set the tail ptr to the last pointer
 			tail_ptr = tail_ptr->link();
-		++many_nodes;
 	}
-	
+
 }
 
 // method to remove item at cursor ==>TO COMPLETE FOR LAB
 void sequenceList::remove_current() {
+	if (!is_item()) {
+		return;
+	}
 	if (cursor == nullptr)
 		return; // target isn't in the sequence, so no work to do
-	if (many_nodes == 1) { // will become blank sequence
+	if (size() == 1) { // will become blank sequence remove all items in the list and set everything to null
 		start();
 		list_clear(head_ptr);
-		precursor = nullptr;
 		head_ptr = nullptr;
 		tail_ptr = nullptr;
 		cursor = nullptr;
+		many_nodes = 0;
+		return;
 	}
-	else {
-		cursor = cursor->link();
-		list_remove(precursor);
-		if (precursor->link() != nullptr)
-			cursor = precursor->link();
-		else {
+	if (size() == 2) {
+		if (precursor != nullptr) { // checks to see if cursor is at the first item or not
+			list_remove(precursor); // remove the item at the cursor
+			head_ptr = precursor;
+			tail_ptr = precursor;
 			cursor = nullptr;
 		}
-		
+		else
+		{
+			list_head_remove(head_ptr); // remove the first item
+			cursor = head_ptr;
+			tail_ptr = head_ptr;
+			precursor = nullptr;
+		}
+
 	}
-	
+	else {
+		if (cursor == nullptr) { // move back to the first item if the cursor is null and remove it
+			cursor = head_ptr;
+			precursor = nullptr;
+			list_head_remove(head_ptr);
+			cursor = head_ptr;
+			while (tail_ptr->link() != nullptr) // set the tail ptr to the last pointer
+				tail_ptr = tail_ptr->link();
+		}
+		else {
+			cursor = cursor->link(); // advance one link
+			if (precursor == nullptr) { // if the item is the first item... remove it
+				list_head_remove(head_ptr); 
+				precursor = nullptr;
+				cursor = head_ptr;
+			}
+			else {
+				list_remove(precursor); // remove the item after the cursor
+				if (precursor->link() != nullptr)
+					cursor = precursor->link(); // set the cursor link if the precursor isn't the last item
+				else {
+					cursor = nullptr; // end of the list
+				}
 
-
+			}
+		}
+	}
 	many_nodes--;
-	if (many_nodes == 1) {
-		precursor = nullptr;
-	}
 }
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
@@ -177,13 +230,45 @@ void sequenceList::operator =(const sequenceList& source) {
 	// check for possible self assignment
 	if (this == &source)
 		return;
-
 	//clear the old list
 	list_clear(head_ptr);
 	tail_ptr = nullptr;
-	list_copy(source.head_ptr, head_ptr, tail_ptr);
-	cursor = source.cursor;
-	precursor = source.precursor;
+	cursor = nullptr;
+	precursor = nullptr;
+	many_nodes = 0;
+
+	if (source.many_nodes == 0) { // empty sequence
+		tail_ptr = nullptr;
+		cursor = nullptr;
+		precursor = nullptr;
+		head_ptr = nullptr;
+	}
+	else if (source.many_nodes == 1) { 
+		list_copy(source.head_ptr, head_ptr , tail_ptr); // copy one item over
+		start(); // go back to the front of the sequence
+	}
+	else {
+		if (source.cursor == nullptr) {
+			list_copy(source.head_ptr, head_ptr, tail_ptr); // copy list over
+			precursor = nullptr;
+			cursor = nullptr;
+		}
+		else if (source.precursor == nullptr&& source.cursor != nullptr) { // the front of the list
+			list_copy(source.head_ptr, head_ptr, tail_ptr); // copy the list
+			start(); // go back to the front of the sequence
+		}
+		else {
+			list_copy(source.precursor, head_ptr, tail_ptr); // insert the nodes after the precursor
+			cursor = head_ptr->link(); // set the cursor after the precursor
+			precursor = head_ptr; //set the head of this list to the precursor
+
+			value_type nodes_left = source.many_nodes - list_length(head_ptr); // see how many items are left to copy over
+			for (nodes_left; nodes_left > 0; nodes_left--) { // copy remaining items starting from the start of the previous list and adding them onto the front
+				list_head_insert(head_ptr, (list_locate(source.head_ptr, nodes_left))->data()); 
+			}
+		}
+		
+	}
 	many_nodes = source.many_nodes;
 }
 
