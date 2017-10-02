@@ -1,3 +1,6 @@
+// Robert Beckwith
+// 9/30/17
+// CIS 2542
 // FILE: sequenceList.cpp
 // CLASS implemented: sequenceList (see sequenceList.h for documentation)
 // INVARIANT for the sequenceList ADT:
