@@ -15,21 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab5\node.cpp">
+    <ClCompile Include="Project1\Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lab5\sequenceList.cpp">
+    <ClCompile Include="Project1\Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lab5\sequenceList_exam.cxx">
+    <ClCompile Include="Project1\node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project1\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project1\Simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab5\node.h">
+    <ClInclude Include="Project1\Card.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lab5\sequenceList.h">
+    <ClInclude Include="Project1\Deck.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project1\node.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project1\Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

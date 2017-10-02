@@ -6,6 +6,7 @@ Description:
 		implementation file for the Player class*/
 
 #include "Player.h"
+#include "node.h"
 
 
 static const Player::size_type HAND_SIZE = 13;
