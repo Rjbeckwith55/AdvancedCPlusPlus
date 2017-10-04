@@ -29,7 +29,7 @@ public:
 	static const size_type HAND_SIZE = 13; // size of each player's hand
 
 	
-	string getName() { return name; } // inline getter
+	const string getName() { return name; } // inline getter
 	void setName(string s); // setter
 
 	//deal the cards out to each of the players in the game

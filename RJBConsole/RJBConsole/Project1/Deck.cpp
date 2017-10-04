@@ -71,18 +71,3 @@ void Deck::shuffle() {
 	
 
 }
-
- /*void Deck::deal(Deck d) {
-	 Player p1;
-	 Player p2;
-	 Player p3;
-	 Player p4;
-	for (size_t i = 0; i < 52; i+=4)
-	{
-		addCard(d.Cards[i],p1);
-		addCard(d.Cards[i+1], p2);
-		addCard(d.Cards[i+2], p3);
-		addCard(d.Cards[i+3], p4);
-
-	}
-}*/
