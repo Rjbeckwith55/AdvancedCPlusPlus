@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClCompile Include="Project1\Card.cpp" />
     <ClCompile Include="Project1\Deck.cpp" />
+    <ClCompile Include="Project1\node.cpp" />
     <ClCompile Include="Project1\Player.cpp" />
     <ClCompile Include="Project1\Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project1\Card.h" />
     <ClInclude Include="Project1\Deck.h" />
+    <ClInclude Include="Project1\node.h" />
     <ClInclude Include="Project1\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

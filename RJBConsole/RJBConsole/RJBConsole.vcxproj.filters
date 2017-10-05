@@ -21,6 +21,9 @@
     <ClCompile Include="Project1\Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Project1\node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Project1\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Project1\Deck.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project1\node.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Project1\Player.h">
