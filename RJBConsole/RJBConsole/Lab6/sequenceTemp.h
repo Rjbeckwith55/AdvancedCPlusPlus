@@ -1,4 +1,5 @@
-// FILE: sequenceList.h
+// Robert Beckwith
+//FILE: sequenceTemp.h
 // CLASS PROVIDED: sequenceList 
 // This is the header file for the project described in Section 5.4
 // of "Data Structures and Other Objects Using C++"
@@ -68,34 +69,35 @@
 #define MAIN_SAVITCH_sequenceList_H
 #include <cstdlib>  // Provides size_t
 #include <cassert>  // Provides assert
-#include "node.h"  // Provides node class
+#include "nodeTemplate.h"  // Provides node class
 
-class sequenceList
+template<class Item>
+class sequenceTemp
 {
 public:
 	// ALIASES and MEMBER CONSTANTS
-	using value_type = node::value_type;
+	using value_type = Item;
 	using size_type = std::size_t;
 	// CONSTRUCTORS and DESTRUCTOR
-	sequenceList();
-	sequenceList(const sequenceList& source);
-	~sequenceList();
+	sequenceTemp();
+	sequenceTemp(const sequenceTemp& source);
+	~sequenceTemp();
 	// MODIFICATION MEMBER FUNCTIONS
 	void start();
 	void advance();
-	void insert(const value_type& entry);
-	void attach(const value_type& entry);
-	void operator =(const sequenceList& source);
+	void insert(const Item& entry);
+	void attach(const Item& entry);
+	void operator =(const Item& source);
 	void remove_current();
 	// CONSTANT MEMBER FUNCTIONS
 	size_type size() const { return many_nodes; }
 	bool is_item() const { return (cursor != nullptr); }
 	value_type current() const;
 private:
-	node *head_ptr;
-	node *tail_ptr;
-	node *cursor;
-	node *precursor;
+	nodeTemplate<Item> *head_ptr;
+	nodeTemplate<Item> *tail_ptr;
+	nodeTemplate<Item> *cursor;
+	nodeTemplate<Item> *precursor;
 	size_type many_nodes;
 };
 
@@ -109,8 +111,9 @@ private:
 // not including end_ptr.  The end_ptr may also be nullptr, in which case
 // the new list contains elements from start_ptr to the end of the list.
 // Library facilities used: cstdlib
-void list_piece(const node* start_ptr, const node* end_ptr, node*& head_ptr, 
-	node*& tail_ptr) {
+template<class Item>
+void list_piece(const nodeTemplate<Item>* start_ptr, const nodeTemplate<Item>* end_ptr, nodeTemplate<Item>*& head_ptr, 
+	nodeTemplate<Item>*& tail_ptr) {
 
 	head_ptr = nullptr;
 	tail_ptr = nullptr;
@@ -134,13 +137,16 @@ void list_piece(const node* start_ptr, const node* end_ptr, node*& head_ptr,
 }
 
 // default constructor
-sequenceList::sequenceList() {
+template<class Item>
+sequenceTemp<Item>::sequenceTemp() {
 	head_ptr = tail_ptr = cursor = precursor = nullptr;
 	many_nodes = 0;
 }
 
 // copy constructor ==>TO COMPLETE FOR LAB
-sequenceList::sequenceList(const sequenceList& source) {
+
+template<class Item>
+sequenceTemp<Item>::sequenceTemp(const sequenceTemp<Item>& source) {
 	if (source.cursor == nullptr)
 	{   // There is no current item in the source list:
 		list_copy(source.head_ptr, head_ptr, tail_ptr);
@@ -162,19 +168,22 @@ sequenceList::sequenceList(const sequenceList& source) {
 }
 
 // the destructor
-sequenceList::~sequenceList() {
+template<class Item>
+sequenceTemp<Item>::~sequenceTemp() {
 	list_clear(head_ptr);
 	many_nodes = 0;
 }
 
 // method to set cursor to beginning of list
-void sequenceList::start() {
+template<class Item>
+void sequenceTemp<Item>::start() {
 	precursor = nullptr;
 	cursor = head_ptr;
 }
 
 // method to advance cursor
-void sequenceList::advance() {
+template<class Item>
+void sequenceTemp<Item>::advance() {
 	assert(is_item());
 	precursor = cursor;
 	cursor = cursor->link();
@@ -183,7 +192,8 @@ void sequenceList::advance() {
 }
 
 // method to insert item before cursor
-void sequenceList::insert(const value_type& entry) {
+template<class Item>
+void sequenceTemp<Item>::insert(const Item& entry) {
 	if (precursor == nullptr)
 	{   // The new entry goes at the front:
 		list_head_insert(head_ptr, entry);
@@ -201,7 +211,8 @@ void sequenceList::insert(const value_type& entry) {
 }
 
 // method to attach item after cursor ==>TO COMPLETE FOR LAB
-void sequenceList::attach(const value_type& entry) {
+template<class Item>
+void sequenceTemp<Item>::attach(const Item& entry) {
 	if (tail_ptr == nullptr)
 		insert(entry); // First node of the list
 	else if (cursor == nullptr)
@@ -223,7 +234,8 @@ void sequenceList::attach(const value_type& entry) {
 }
 
 // method to remove item at cursor ==>TO COMPLETE FOR LAB
-void sequenceList::remove_current() {
+template<class Item>
+void sequenceTemp<Item>::remove_current() {
 	assert(is_item());
 	if (cursor == head_ptr)
 	{   // Remove the front node:
@@ -246,7 +258,8 @@ void sequenceList::remove_current() {
 }
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
-void sequenceList::operator =(const sequenceList& source) {
+template<class Item>
+void sequenceTemp<Item>::operator =(const Item& source) {
 	if (this == &source)
 		return;
 
@@ -272,7 +285,8 @@ void sequenceList::operator =(const sequenceList& source) {
 }
 
 // method to return item at cursor
-sequenceList::value_type sequenceList::current() const {
+template<class Item>
+Item sequenceTemp<Item>::current() const {
 	assert(is_item());
 	return cursor->data();
 }
