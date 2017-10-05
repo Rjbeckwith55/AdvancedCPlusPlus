@@ -1,56 +1,58 @@
 // Robert Beckwith
+//10/5/17
+//CIS 2542
 //FILE: sequenceTemp.h
-// CLASS PROVIDED: sequenceList 
+// CLASS PROVIDED: nodeTemp
 // This is the header file for the project described in Section 5.4
 // of "Data Structures and Other Objects Using C++"
-// This is called "sequenceList" because some students already implemented
+// This is called "sequenceTemp" because some students already implemented
 // sequenceFixed (with a fixed array) and sequenceDynamic (with a dynamic array).
 //
-// ALIASES and MEMBER CONSTANTS for the sequenceList class:
+// ALIASES and MEMBER CONSTANTS for the sequenceTemp class:
 //   alias ____ value_type
-//     sequenceList::value_type is the data type of the items in the sequenceList. It
+//     sequenceTemp::value_type is the data type of the items in the sequenceTemp. It
 //     may be any of the C++ built-in types (int, char, etc.), or a class with a
 //     default constructor, an assignment operator, and a copy constructor.
 //
 //   alias ____ size_type
-//     sequenceList::size_type is the data type of any variable that keeps track of
-//     how many items are in a sequenceList.
+//     sequenceTemp::size_type is the data type of any variable that keeps track of
+//     how many items are in a sequenceTemp.
 //
-// CONSTRUCTOR for the sequenceList class:
-//   sequenceList( )
-//     Postcondition: The sequenceList has been initialized as an empty sequenceList.
+// CONSTRUCTOR for the sequenceTemp class:
+//   sequenceTemp( )
+//     Postcondition: The sequenceTemp has been initialized as an empty sequenceTemp.
 //
-// MODIFICATION MEMBER FUNCTIONS for the sequenceList class:
+// MODIFICATION MEMBER FUNCTIONS for the sequenceTemp class:
 //   void start( )
-//     Postcondition: The first item on the sequenceList becomes the current item
-//     (but if the sequenceList is empty, then there is no current item).
+//     Postcondition: The first item on the sequenceTemp becomes the current item
+//     (but if the sequenceTemp is empty, then there is no current item).
 //
 //   void advance( )
 //     Precondition: is_item returns true.
 //     Postcondition: If the current item was already the last item in the
-//     sequenceList, then there is no longer any current item. Otherwise, the new
+//     sequenceTemp, then there is no longer any current item. Otherwise, the new
 //     current item is the item immediately after the original current item.
 //
 //   void insert(const value_type& entry)
-//     Postcondition: A new copy of entry has been inserted in the sequenceList
+//     Postcondition: A new copy of entry has been inserted in the sequenceTemp
 //     before the current item. If there was no current item, then the new entry
-//     has been inserted at the front of the sequenceList. In either case, the newly
-//     inserted item is now the current item of the sequenceList.
+//     has been inserted at the front of the sequenceTemp. In either case, the newly
+//     inserted item is now the current item of the sequenceTemp.
 //
 //   void attach(const value_type& entry)
-//     Postcondition: A new copy of entry has been inserted in the sequenceList after
+//     Postcondition: A new copy of entry has been inserted in the sequenceTemp after
 //     the current item. If there was no current item, then the new entry has
-//     been attached to the end of the sequenceList. In either case, the newly
-//     inserted item is now the current item of the sequenceList.
+//     been attached to the end of the sequenceTemp. In either case, the newly
+//     inserted item is now the current item of the sequenceTemp.
 //
 //   void remove_current( )
 //     Precondition: is_item returns true.
-//     Postcondition: The current item has been removed from the sequenceList, and
+//     Postcondition: The current item has been removed from the sequenceTemp, and
 //     the item after this (if there is one) is now the new current item.
 //
-// CONSTANT MEMBER FUNCTIONS for the sequenceList class:
+// CONSTANT MEMBER FUNCTIONS for the sequenceTemp class:
 //   size_type size( ) const
-//     Postcondition: The return value is the number of items in the sequenceList.
+//     Postcondition: The return value is the number of items in the sequenceTemp.
 //
 //   bool is_item( ) const
 //     Postcondition: A true return value indicates that there is a valid
@@ -60,13 +62,13 @@
 //
 //   value_type current( ) const
 //     Precondition: is_item( ) returns true.
-//     Postcondition: The item returned is the current item in the sequenceList.
+//     Postcondition: The item returned is the current item in the sequenceTemp.
 //
-// VALUE SEMANTICS for the sequenceList class:
-//    Assignments and the copy constructor may be used with sequenceList objects.
+// VALUE SEMANTICS for the sequenceTemp class:
+//    Assignments and the copy constructor may be used with sequenceTemp objects.
 
-#ifndef MAIN_SAVITCH_sequenceList_H
-#define MAIN_SAVITCH_sequenceList_H
+#ifndef MAIN_SAVITCH_sequenceTemp_H
+#define MAIN_SAVITCH_sequenceTemp_H
 #include <cstdlib>  // Provides size_t
 #include <cassert>  // Provides assert
 #include "nodeTemplate.h"  // Provides node class
@@ -92,7 +94,7 @@ public:
 	// CONSTANT MEMBER FUNCTIONS
 	size_type size() const { return many_nodes; }
 	bool is_item() const { return (cursor != nullptr); }
-	value_type current() const;
+	Item current() const;
 private:
 	nodeTemplate<Item> *head_ptr;
 	nodeTemplate<Item> *tail_ptr;
