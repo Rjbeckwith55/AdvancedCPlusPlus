@@ -293,3 +293,20 @@ Item sequenceTemp<Item>::current() const {
 	return cursor->data();
 }
 
+/*==========>TEST RESULTS<==========
+If you submit this sequenceTemp class now, you will have
+30 points out of the 30 points from this test program.
+==========>POINT SUMMARY<==========
+Testing insert, attach, and the constant member functions
+        POINTS = 5 out of 5
+Testing situations where the cursor goes off the sequenceTemp
+        POINTS = 5 out of 5
+Testing remove_current
+        POINTS = 5 out of 5
+Testing the copy constructor
+        POINTS = 5 out of 5
+Testing the assignment operator
+        POINTS = 5 out of 5
+Testing insert/attach for somewhat larger sequenceTemps
+        POINTS = 5 out of 5
+Press any key to continue . . .*/
