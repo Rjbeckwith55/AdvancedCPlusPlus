@@ -163,7 +163,7 @@ sequenceTemp<Item>::sequenceTemp(const sequenceTemp<Item>& source) {
 	else
 	{   // The current item in the source is not at its head:
 		list_piece(source.head_ptr, source.cursor, head_ptr, precursor);
-		list_piece(source.cursor, nullptr, cursor, tail_ptr);
+		list_piece(source.cursor, static_cast<nodeTemplate<Item>*>(nullptr), cursor, tail_ptr);
 		precursor->set_link(cursor);
 	}
 	many_nodes = source.many_nodes;
@@ -241,7 +241,7 @@ void sequenceTemp<Item>::remove_current() {
 	assert(is_item());
 	if (cursor == head_ptr)
 	{   // Remove the front node:
-		list_head_remove(head_ptr);
+		list_head_remove(static_cast<nodeTemplate<Item>*>(head_ptr));
 		cursor = head_ptr;
 		if (cursor == nullptr)
 			tail_ptr = nullptr; // No more nodes on the list.
@@ -280,7 +280,7 @@ void sequenceTemp<Item>::operator =(const Item& source) {
 	else
 	{   // The current item in the source is not at its head:
 		list_piece(source.head_ptr, source.cursor, head_ptr, precursor);
-		list_piece(source.cursor, nullptr, cursor, tail_ptr);
+		list_piece(source.cursor, static_cast<nodeTemplate<Item>*>(nullptr), cursor, tail_ptr);
 		precursor->set_link(cursor);
 	}
 	many_nodes = source.many_nodes;
