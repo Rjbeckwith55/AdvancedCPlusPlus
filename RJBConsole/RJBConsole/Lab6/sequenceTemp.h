@@ -89,7 +89,7 @@ public:
 	void advance();
 	void insert(const Item& entry);
 	void attach(const Item& entry);
-	void operator =(const Item& source);
+	void operator =(const sequenceTemp& source);
 	void remove_current();
 	// CONSTANT MEMBER FUNCTIONS
 	size_type size() const { return many_nodes; }
@@ -261,7 +261,7 @@ void sequenceTemp<Item>::remove_current() {
 
 // overloaded = assignment operator ==>TO COMPLETE FOR LAB
 template<class Item>
-void sequenceTemp<Item>::operator =(const Item& source) {
+void sequenceTemp<Item>::operator =(const sequenceTemp<Item>& source) {
 	if (this == &source)
 		return;
 
