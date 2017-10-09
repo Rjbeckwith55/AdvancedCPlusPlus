@@ -12,20 +12,16 @@ Description:
 int main() {
 	string x; // variable to pause at the end -- has value or purpose besides to put into cin
 	string name1, name2, name3, name4; // local variables to hold the player names
-	Player p1, p2, p3, p4;
+	Player p1, p2, p3, p4, winningPlayer;
 	int k;
 	Deck deck;
-	Card c;
+	Card c, LargestValue;
 	const Player::size_type MIN_VALUE = 0, MAX_VALUE = 3; // Variables used for the random function
 
 	// generate a random seed off of time
 	unsigned seed = time(0);
 	srand(seed);
 	Player::size_type random;
-
-	
-
-
 	
 	name1 = "Player 1";
 	name2 = "Player 2";
@@ -84,12 +80,21 @@ int main() {
 	cout << p3.getName() << "'s hand value: " << getValue(ptr3->data()) << endl;
 	cout << p4.getName() << "'s hand value: " << getValue(ptr4->data()) << endl;
 
+	cout << "Welcome to the card simulation. Each round a player will discard a card off the bottom of their deck." << endl;
+	cout << "The player with the largest card discarded wins the round. The winner is the one with the most rounds won at the end of the simulation." << endl;
+
+	// pause and wait for start
+	cout << "Press any key and then ENTER to start simulating: ";
+	cin >> x;
 
 	cout << "***Discard 4 cards: ***" << endl;
 
 	for (size_t i = 0; i < Player::HAND_SIZE; i++)
 	{
+		
 		Player tempP; // declare a temp player for passing to discard
+
+		LargestValue.setRank(0); // initialize the largest card to a zero value
 
 		random = rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE; // generate a random from 0 to 3
 
@@ -119,17 +124,59 @@ int main() {
 			start->set_data(tempP); // set the pointer data to the modified player from the discard function
 			cout << start->data().getName()<<" Discards the ";
 			cout << c;
+			// Find the largest card discarded in this round and set it to a temporary winning player
+			if (LargestValue.getRank() < c.getRank()) {
+				winningPlayer = start->data();
+				LargestValue.setRank(c.getRank());
+				LargestValue.setSuit(c.getSuit());
+			}
+			
 			start = start->link(); // progress down the list
 			counter = start;
 		}
+		//output the winning card for the round
+		cout << "Winning Player: " << winningPlayer.getName() << endl;
+		cout << "Largest Card: " << LargestValue;
+
+		//add one to the correct players score
+		if (winningPlayer.getName() == p1.getName()) {
+			p1.setScore(p1.getScore() + 1);
+		}
+		if (winningPlayer.getName() == p2.getName()) {
+			p2.setScore(p2.getScore() + 1);
+		}
+		if (winningPlayer.getName() == p3.getName()) {
+			p3.setScore(p3.getScore() + 1);
+		}
+		if (winningPlayer.getName() == p4.getName()) {
+			p4.setScore(p4.getScore() + 1);
+		}
+
 		cout << p1.getName() << "'s hand value: " << getValue(ptr1->data()) << endl;
 		cout << p2.getName() << "'s hand value: " << getValue(ptr2->data()) << endl;
 		cout << p3.getName() << "'s hand value: " << getValue(ptr3->data()) << endl;
 		cout << p4.getName() << "'s hand value: " << getValue(ptr4->data()) << endl;
 
-		//Pause the game
-		cout << "Press any key and enter to continue playing: ";
-		cin >> x;
+		/*cout << "The current score is: " << p1.getName() << " with " << p1.getScore() << endl;
+		cout << "The current score is: " << p2.getName() << " with " << p2.getScore() << endl;
+		cout << "The current score is: " << p3.getName() << " with " << p3.getScore() << endl;
+		cout << "The current score is: " << p4.getName() << " with " << p4.getScore() << endl;*/
+
+		
+		if (getValue(ptr1->data())) { // don't pause on the last round
+			//Pause the game after each round
+			cout << "Press any key and enter to continue playing: ";
+			cin >> x;
+		}
+		
 	}
+
+	// output the final scores
+	cout << "The final score is: "<<p1.getName() <<" with " << p1.getScore() << endl;
+	cout << "The final score is: " << p2.getName() << " with " << p2.getScore() << endl;
+	cout << "The final score is: " << p3.getName() << " with " << p3.getScore() << endl;
+	cout << "The final score is: " << p4.getName() << " with " << p4.getScore() << endl;
+	cout << "Thank you for playing!" << endl;
+
 	return 0;
 }

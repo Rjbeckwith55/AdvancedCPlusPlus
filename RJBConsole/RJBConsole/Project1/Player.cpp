@@ -14,10 +14,15 @@ static const Player::size_type HAND_SIZE = 13;
 
 Player::Player(){
 	name = "";
+	score = 0;
 }
 
 void Player::setName(string s) {
 	name = s; 
+}
+
+void Player::setScore(int sc) {
+	score = sc;
 }
 
 //prints out the hand

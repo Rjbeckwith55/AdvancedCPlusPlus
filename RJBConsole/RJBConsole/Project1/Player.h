@@ -22,6 +22,9 @@ private:
 	// vector of cards to hold the cards for each players hand
 	vector<Card> hand;
 
+	// integer to keep the player's score
+	int score;
+
 public:
 	Player(); // default constructor
 
@@ -30,7 +33,9 @@ public:
 
 	
 	const string getName() { return name; } // inline getter
-	void setName(string s); // setter
+	void setName(string); // setter
+	const int getScore() { return score; } // inline getter
+	void setScore(int); // setter
 
 	//deal the cards out to each of the players in the game
 	friend void deal(Player&, Player&, Player&, Player&, Deck);
