@@ -180,5 +180,11 @@ int main() {
 	cout << "The final score is: " << p4.getName() << " with " << p4.getScore() << endl;
 	cout << "Thank you for playing!" << endl;
 
+	// Clear the linked list
+	delete ptr1;
+	delete ptr2;
+	delete ptr3;
+	delete ptr4;
+
 	return 0;
 }
