@@ -1,9 +1,11 @@
 /*Author: Robert Beckwith
 Date: 9/25/17
 Class: CIS 2542
-File: simulation.cpp
+File: Simulation.cpp
 Description:
-			Simulation program to pick a random player and discard the cards*/
+			Simulation program where a player is chosen at random to start and all the players discard a card.
+			The player with the highest card discarded wins the round(Ties are broken by who went first). The
+			score is tallied at the end.*/
 
 #include "Player.h"
 #include "node.h"
@@ -135,8 +137,8 @@ int main() {
 			counter = start;
 		}
 		//output the winning card for the round
-		cout << "Winning Player: " << winningPlayer.getName() << endl;
-		cout << "Largest Card: " << LargestValue;
+		cout << "Winning Player for the round: " << winningPlayer.getName() << endl;
+		cout << "Largest Card for the round: " << LargestValue;
 
 		//add one to the correct players score
 		if (winningPlayer.getName() == p1.getName()) {

@@ -18,7 +18,6 @@ Description:
 
 class Deck {
 public:
-	using value_type = Card;
 	using size_type = std::size_t;
 	static const size_type CAPACITY = 52;
 
@@ -38,6 +37,6 @@ public:
 	
 private:
 	// array to hold all the cards in the deck 
-	value_type Cards[CAPACITY]; // The deck
+	Card Cards[CAPACITY]; // The deck
 };
 #endif

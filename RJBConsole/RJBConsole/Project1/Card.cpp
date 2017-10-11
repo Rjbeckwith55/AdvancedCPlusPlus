@@ -3,7 +3,7 @@ Date: 9/12/17
 Class: CIS 2542
 File: Card.cpp
 Description:
-	Implementation file for the Card class*/
+		Implementation file for the Card class*/
 
 #include "Card.h"
 Card::Card() {

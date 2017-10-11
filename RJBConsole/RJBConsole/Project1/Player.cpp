@@ -1,7 +1,7 @@
 /*Author: Robert Beckwith
 Date: 9/19/17
 Class: CIS 2542
-File: Player.h
+File: Player.cpp
 Description:
 		implementation file for the Player class*/
 
@@ -54,11 +54,12 @@ Card discard(Player& p) {
 	return c;
 }
 
+//get the total value of the player's hand
 int getValue(Player& p) {
 	int value = 0;
 	for (size_t i = 0; i < p.hand.size(); i++)
 	{
-		value = value + p.hand[i];
+		value = value + p.hand[i]; // overloaded card operator
 	}
 	return value; 
 
