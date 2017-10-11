@@ -185,6 +185,9 @@ int main() {
 	delete ptr2;
 	delete ptr3;
 	delete ptr4;
+	delete sentinelStart;
+	delete counter;
+	delete start;
 
 	return 0;
 }
