@@ -22,19 +22,31 @@ PriorityQueue::PriorityQueue()
 
 PriorityQueue::PriorityQueue(const PriorityQueue& source)
 {
+	
+	if (this == &source) // Handle self-assignment
+		return;
+	
+	head_ptr = nullptr;
+	many_nodes = 0;
+
+	//check for a blank list
+	if (source.head_ptr == nullptr) {
+		head_ptr = nullptr;
+		many_nodes = 0;
+		return;
+	}
 	Node *temp;
+	//set some variables equal to the head of the list
 
 	temp = source.head_ptr;
-
-	many_nodes = source.many_nodes;
-	while (head_ptr != nullptr)
+	//list copy assuming they are in priority order
+	for (int i = 0; i < source.many_nodes; i++)
 	{
-		head_ptr->priority = source.head_ptr->priority;
-		head_ptr->data = source.head_ptr->data;
-		head_ptr = head_ptr->link;
+		insert(temp->data, temp->priority);
+		temp = temp->link;
 	}
-	head_ptr = temp;
-	delete temp;
+
+
 }
 
 PriorityQueue::~PriorityQueue()
@@ -51,103 +63,88 @@ PriorityQueue::~PriorityQueue()
 
 void PriorityQueue::operator =(const PriorityQueue& source)
 {
+	
 	if (this == &source) // Handle self-assignment
 		return;
+
+	//destructor to clear the previous
+	PriorityQueue::~PriorityQueue();
+
+
+	//check for a blank list
+	if (source.head_ptr == nullptr) {
+		head_ptr = nullptr;
+		many_nodes = 0;
+		return;
+	}
+	Node *temp;
+	//set a temp equal to the front of the new list
+	temp = source.head_ptr;
+
+	//list copy, Traverse the list and insert the items from the new list
+	for (int i = 0; i < source.many_nodes; i++)
+	{
+		insert(temp->data, temp->priority);
+		temp = temp->link;
+	}
+
 
 }
 
 void PriorityQueue::insert(const Item& entry, unsigned int priority)
 {
 	// If the sequence is empty add it to the front and set the priority.
-	if (many_nodes == 0) {
-		head_ptr = new Node();
-		head_ptr->link = nullptr;
-		head_ptr->data = entry;
-		head_ptr->priority = priority;
-		many_nodes = 1;
+	Node *temp = nullptr;
+	Node *tempHead = nullptr;
+
+	//hold the head pointer of the list
+	tempHead = head_ptr;
+
+	//set the new node to be equal to the entry
+	// we will later insert this node into the list
+	Node *newNode = new Node();
+	newNode->data = entry;
+	newNode->priority = priority;
+	newNode->link = nullptr;
+	many_nodes++;
+	//empty list add the new item to the front
+	if (tempHead == nullptr) {
+		head_ptr = newNode;
 		return;
 	}
-	else if (many_nodes == 1)
-	{
-		//if the priority is of this new nod is greater add it to the front of the queue
-		if (priority > head_ptr->priority) { // insert into the front // for some reason this ends up being null
-			Node *temp = head_ptr; // store the head pointer temporarily
-			head_ptr = new Node(); // create a new node in front
-			// set the data and priority of this new node
-			head_ptr->data = entry;
-			head_ptr->priority = priority;
-			//set the link of the head pointer to what the previous head was
-			head_ptr->link = temp;
-			many_nodes++;
-		}
-		// the priority of the new entry is less than the current node
-		else {
-			head_ptr->link = new Node(); // create a new node after the head
-			// set the data and priority of this new node
-			head_ptr->link->data = entry;
-			head_ptr->link->priority = priority;
-			many_nodes++;
-		}
+	// traverse the list until the new node's priority is less than a current nodes
+	while (tempHead != nullptr && tempHead->priority >= priority) {
+		temp = tempHead; // acts as a previous variable allowing us to insert after it
+		tempHead = tempHead->link;
 	}
-	//if there are more than two nodes
-	else {
-		Node *temp;
-		Node *previous;
-		Node *EvenMoreTemp;
-		temp = head_ptr;
-		previous = nullptr;
-		// loop through the list until the added priority is less than the current item in the list
-		while (temp != nullptr && temp->priority > priority) {
-			previous = temp;
-			temp = temp->link;
-		}
-		if (temp != nullptr && previous != nullptr) {
-			//set the item at previous to be equal to the new priority item
-			EvenMoreTemp = new Node();
-			EvenMoreTemp->data = previous->data;
-			EvenMoreTemp->priority = previous->priority;
-			EvenMoreTemp->link = temp;
+	// tempHead is behind the new node
+	newNode->link = tempHead;
 
-			//set the data of previous to point to the new
-			previous->data = entry;
-			previous->priority = priority;
-			previous->link = EvenMoreTemp;
-			delete EvenMoreTemp;
-		}
-		//add to the head of the list
-		else if (previous == nullptr) {
-			temp = head_ptr; // store the head pointer temporarily
-			head_ptr = new Node(); // create a new node in front
-								   // set the data and priority of this new node
-			head_ptr->data = entry;
-			head_ptr->priority = priority;
-			//set the link of the head pointer to what the previous head was
-			head_ptr->link = temp;
-		}
-		else { // happens when at the end of the sequence
-			temp = new Node();
-			temp->data = entry;
-			temp->priority = priority;
-			previous->link = temp;
-		}
-
-		many_nodes++;
-
-		//release memory
-		
-		
+	if (tempHead == head_ptr) {
+		//(List_Head_Insert) adding the node to the front because it has the greatest priority
+		head_ptr = newNode;
+		return;
 	}
-
+	// set the link of the previous node to the new node
+	// It now has been inserted into the linked list
+	temp->link = newNode;
 
 
 }
 
 PriorityQueue::Item PriorityQueue::get_front()
-{
-	assert(size() > 0);
+{ // must free up memory here
 	Item answer;
-	answer = head_ptr->data;
-	head_ptr = head_ptr->link;
-	many_nodes--;
+	//check to see if head exists
+	if (head_ptr != nullptr)
+	{
+		Node *Front = head_ptr;
+
+		answer = head_ptr->data;
+		head_ptr = head_ptr->link;
+
+		delete Front; // delete the previous head pointer out of memory
+		many_nodes--;
+	}
 	return answer;
 }
