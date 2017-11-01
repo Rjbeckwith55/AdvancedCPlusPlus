@@ -16,9 +16,13 @@ size_t list_length(const node* head_ptr) {
 	size_t answer;
 
 	answer = 0;
-	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
-		++answer;
-
+	if (head_ptr != nullptr) {
+		cursor = head_ptr;
+		cursor = cursor->link();
+		answer++;
+		answer = list_length(cursor) ;
+		
+	}
 	return answer;
 }
 
