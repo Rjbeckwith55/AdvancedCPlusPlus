@@ -22,11 +22,14 @@ size_t list_length(const node* head_ptr) {
 	if (head_ptr != nullptr) {
 		cursor = head_ptr;
 		cursor = cursor->link();
+		answer = list_length(cursor);
+
+		//added into here so it doesn't add one on the final return
 		answer++;
-		answer = list_length(cursor) ;
-		
+		return answer;
 	}
 	return answer;
+	
 }
 
 // insert new node with data at beginning of list
@@ -50,7 +53,7 @@ node* list_search(node* head_ptr, const node::value_type& target) {
 
 	if (head_ptr != nullptr) {
 		cursor = head_ptr;
-		if (target == cursor->data()) {
+		if (target == cursor->data()) { // search until a target is found
 			return cursor;
 		}
 		cursor = cursor->link();
@@ -182,3 +185,40 @@ void delete_list(node* head_ptr) {
 	delete head_ptr;
 	
 }
+
+/*The number of items in list is 5
+List items in order:
+11.1
+77.7
+22.2
+33.3
+5.5
+List items in reverse order:
+5.5
+33.3
+22.2
+77.7
+11.1
+
+Searching with non-constant recursive function...
+Input a  value to search (0 to end): 22.2
+22.2 has been found!
+Input a  value to search (0 to end): 77.7
+77.7 has been found!
+Input a  value to search (0 to end): 23.4
+23.4 has NOT been found!
+Input a  value to search (0 to end): 21.3
+21.3 has NOT been found!
+Input a  value to search (0 to end): 0
+
+Searching with constant recursive function...
+Input a  value to search (0 to end): 33.3
+33.3 has been found!
+Input a  value to search (0 to end): 77.7
+77.7 has been found!
+Input a  value to search (0 to end): 5.5
+5.5 has been found!
+Input a  value to search (0 to end): 456
+456 has NOT been found!
+Input a  value to search (0 to end): 0
+Press any key to continue . . .*/
