@@ -3,7 +3,9 @@
 // linked list toolkit (see node1.h for documentation).
 // INVARIANT for the node class:
 //   The data of a node is stored in data_field, and the link in link_field.
-
+/*Robert Beckwith
+11/1/17
+*/
 #include "node.h"
 #include <cassert>    // Provides assert
 #include <cstdlib>    // Provides size_t
@@ -41,7 +43,7 @@ void list_insert(node* previous_ptr, const node::value_type& entry) {
 	previous_ptr->set_link(insert_ptr);
 }
 
-//***AAA***modify to recursive version
+//***RJB***modify to recursive version
 // search list for given item, return node pointer to first found item or nullptr
 node* list_search(node* head_ptr, const node::value_type& target) {
 	node *cursor;
@@ -59,7 +61,7 @@ node* list_search(node* head_ptr, const node::value_type& target) {
 	return nullptr;
 }
 
-//***AAA***modify to recursive version
+//***RJB***modify to recursive version
 // search list for given item, return constant node pointer to first found item or nullptr
 const node* list_search(const node* head_ptr, const node::value_type& target) {
 	const node *cursor;
@@ -153,7 +155,7 @@ void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr) {
 	}
 }
 
-//***ZZZ***added recursive function
+//***RJB***added recursive function
 void display_list(const node* head_ptr) {
 	if (head_ptr != nullptr) {
 		cout << head_ptr->data() << endl;
@@ -161,15 +163,22 @@ void display_list(const node* head_ptr) {
 	}
 }
 
+//***RJB***added recursive function
 void rev_display_list(const node* head_ptr) {
 
 	if (head_ptr->link() != nullptr) {		
-		display_list(head_ptr->link());	
+		rev_display_list(head_ptr->link());	
 	}
 	// print after the call so it goes in reverse
 	cout << head_ptr->data() << endl;
 }
 
+//***RJB***added recursive function
 void delete_list(node* head_ptr) {
-
+	if (head_ptr->link() != nullptr) {
+		delete_list(head_ptr->link());
+	}
+	//delete after the call so it deletes all the nodes after they have been called
+	delete head_ptr;
+	
 }
