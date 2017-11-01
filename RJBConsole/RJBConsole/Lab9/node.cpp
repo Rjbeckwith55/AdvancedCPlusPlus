@@ -45,9 +45,16 @@ void list_insert(node* previous_ptr, const node::value_type& entry) {
 node* list_search(node* head_ptr, const node::value_type& target) {
 	node *cursor;
 
-	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
-		if (target == cursor->data())
+	if (head_ptr != nullptr) {
+		cursor = head_ptr;
+		if (target == cursor->data) {
 			return cursor;
+		}
+		cursor = cursor->link();
+		cursor = list_search(cursor,target);
+		return cursor;
+
+	}
 	return nullptr;
 }
 
@@ -56,9 +63,16 @@ node* list_search(node* head_ptr, const node::value_type& target) {
 const node* list_search(const node* head_ptr, const node::value_type& target) {
 	const node *cursor;
 
-	for (cursor = head_ptr; cursor != nullptr; cursor = cursor->link())
-		if (target == cursor->data())
+	if (head_ptr != nullptr) {
+		cursor = head_ptr;
+		if (target == cursor->data) {
 			return cursor;
+		}
+		cursor = cursor->link();
+		cursor = list_search(cursor, target);
+		return cursor;
+
+	}
 	return nullptr;
 }
 
@@ -139,3 +153,8 @@ void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr) {
 }
 
 //***ZZZ***added recursive function
+void display_list(const node* head_ptr) {
+
+}
+void rev_display_list(const node* head_ptr);
+void delete_list(node* head_ptr);
