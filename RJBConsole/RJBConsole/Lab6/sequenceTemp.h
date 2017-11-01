@@ -148,7 +148,7 @@ sequenceTemp<Item>::sequenceTemp() {
 // copy constructor ==>TO COMPLETE FOR LAB
 
 template<class Item>
-sequenceTemp<Item>::sequenceTemp(const sequenceTemp<Item>& source) {
+sequenceTemp<Item>::sequenceTemp(const sequenceTemp& source) {
 	if (source.cursor == nullptr)
 	{   // There is no current item in the source list:
 		list_copy(source.head_ptr, head_ptr, tail_ptr);
