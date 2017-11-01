@@ -7,6 +7,7 @@
 #include "node.h"
 #include <cassert>    // Provides assert
 #include <cstdlib>    // Provides size_t
+#include <iostream>
 using namespace std;
 
 //***AAA***modify to recursive version
@@ -47,7 +48,7 @@ node* list_search(node* head_ptr, const node::value_type& target) {
 
 	if (head_ptr != nullptr) {
 		cursor = head_ptr;
-		if (target == cursor->data) {
+		if (target == cursor->data()) {
 			return cursor;
 		}
 		cursor = cursor->link();
@@ -65,7 +66,7 @@ const node* list_search(const node* head_ptr, const node::value_type& target) {
 
 	if (head_ptr != nullptr) {
 		cursor = head_ptr;
-		if (target == cursor->data) {
+		if (target == cursor->data()) {
 			return cursor;
 		}
 		cursor = cursor->link();
@@ -154,7 +155,21 @@ void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr) {
 
 //***ZZZ***added recursive function
 void display_list(const node* head_ptr) {
+	if (head_ptr != nullptr) {
+		cout << head_ptr->data() << endl;
+		display_list(head_ptr->link());
+	}
+}
+
+void rev_display_list(const node* head_ptr) {
+
+	if (head_ptr->link() != nullptr) {		
+		display_list(head_ptr->link());	
+	}
+	// print after the call so it goes in reverse
+	cout << head_ptr->data() << endl;
+}
+
+void delete_list(node* head_ptr) {
 
 }
-void rev_display_list(const node* head_ptr);
-void delete_list(node* head_ptr);
