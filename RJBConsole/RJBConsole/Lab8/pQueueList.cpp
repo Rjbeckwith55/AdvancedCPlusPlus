@@ -1,3 +1,7 @@
+/*Robert Beckwith
+10/28/17
+CIS 2542
+Lab 8*/
 // FILE: pQueueList.cpp
 // First implementation of the priority queue, which stores items on a
 // linked list. See pQueueList.h for complete specification.
@@ -148,3 +152,16 @@ PriorityQueue::Item PriorityQueue::get_front()
 	}
 	return answer;
 }
+/*==========>TEST RESULTS<==========
+If you submit this PriorityQueue class now, you will have
+25 points out of the 30 points from this test program.
+==========>POINT SUMMARY<==========
+simple tests of insert and get_front
+        POINTS = 10 out of 10
+Testing for possible heap leaks
+        POINTS = 5 out of 5
+Testing the copy constructor
+        POINTS = 5 out of 5
+Testing the assignment operator
+        POINTS = 5 out of 5
+Press any key to continue . . .*/
