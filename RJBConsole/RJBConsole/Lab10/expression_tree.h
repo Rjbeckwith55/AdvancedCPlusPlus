@@ -10,23 +10,6 @@ Descr:
 #include <stack>
 using namespace std;
 
-class expression_tree {
-private:
-	exp_node* root;
-	stack<int> numbers;
-public:
-	//constructors
-	expression_tree :: expression_tree();
-	expression_tree::expression_tree(istream&);
-	expression_tree::~expression_tree(); // destructor
-	
-	int evaluate(exp_node*);
-
-	exp_node* get_root() {
-		return root;
-	}
-};
-
 struct exp_node {
 	int number;
 	char op;
@@ -42,20 +25,61 @@ struct exp_node {
 	}
 };
 
+class expression_tree {
+private:
+	exp_node* root = nullptr;
+	stack<int> numbers;
+public:
+	//constructors
+	expression_tree :: expression_tree();
+	expression_tree::expression_tree(istream&);
+	expression_tree::~expression_tree(); // destructor
+	
+	int evaluate(exp_node*);
+
+	void tree_clear(exp_node*);
+
+	exp_node* get_root() {
+		return root;
+	}
+	void set_root(exp_node*);
+};
+
+
+
 
 // implementation
+void expression_tree::set_root(exp_node* r) {
+	root = r;
+}
 
+expression_tree::~expression_tree() {
+	tree_clear(root);
+}
+
+void expression_tree::tree_clear(exp_node* rt) {
+	exp_node* child;
+	if (rt != nullptr)
+	{
+		child = rt->right_field;
+		tree_clear(child);
+		child = rt->right_field;
+		tree_clear(child);
+		delete rt;
+		rt = nullptr;
+	}
+}
+
+
+//default contructor
 expression_tree::expression_tree() {
 	exp_node* root = new exp_node(); // create blank tree
 }
 
 expression_tree::expression_tree(istream& ins) {
-	exp_node *cursor = get_root();
+	exp_node* root = new exp_node();
+	exp_node *cursor = root;
 	bool done = false;
-	if (get_root() == nullptr) // maybe change with root op and number == ' ' and == 0 respectively
-	{
-		exp_node* root = new exp_node(); // create a new node if there isn't one already
-	}
 
 	int number;
 	char op;
@@ -72,7 +96,7 @@ expression_tree::expression_tree(istream& ins) {
 			}
 			ins >> number;
 			//populate left side if there isn't anything on the left side
-			if (root->left_field == nullptr) {
+			if (root->op == ' ' && root->number == 0 ) { // check for default values...
 				root->left_field = new exp_node();
 				root->left_field->number = number;
 			}
@@ -124,5 +148,6 @@ int expression_tree::evaluate(exp_node* rt) { // recursively traverse the tree t
 		}
 		return total;
 	}
+	return total;
 	
 }
