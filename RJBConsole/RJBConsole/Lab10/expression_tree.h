@@ -7,7 +7,7 @@ Descr:
 	Specification file for expression tree which will evaluate postfix operators with a tree
 */
 #include <iostream>
-#include <stack>
+#include <queue>
 using namespace std;
 
 struct exp_node {
@@ -48,22 +48,36 @@ public:
 
 // implementation
 expression_tree::~expression_tree() {
-	tree_clear(root);
-}
+	queue<exp_node*> nodes;
+	nodes.push(root);
 
-void expression_tree::tree_clear(exp_node* rt) {
-	exp_node* child;
-	//recursively delete all the nodes
-	if (rt != nullptr)
+	while (!nodes.empty())
 	{
-		child = rt->right_field;
-		tree_clear(child);
-		child = rt->right_field;
-		tree_clear(child);
-		delete rt;
-		rt = nullptr;
+		exp_node* temp = nodes.front();
+		nodes.pop();
+		if (temp->left_field != nullptr)
+		{
+			nodes.push(temp->left_field);
+		}
+		if (temp->right_field != nullptr)
+		{
+			nodes.push(temp->right_field);
+		}
+		delete temp;
 	}
 }
+
+//void expression_tree::tree_clear(exp_node* rt) {
+//	//exp_node* child;
+//	//recursively delete all the nodes
+//	if (rt != nullptr)
+//	{
+//		tree_clear(rt->right_field);
+//		tree_clear(rt->right_field);
+//		delete rt;
+//		rt = nullptr;
+//	}
+//}
 
 
 //default contructor
@@ -126,3 +140,25 @@ int evaluate(exp_node* rt) { // recursively traverse the tree to evaluate it.
 	}
 
 }
+/*Enter the postfix expression:  1 2 + 4 * 3 +
+                    +
+                        3 [leaf]
+                        *
+                            4 [leaf]
+                            +
+                                2 [leaf]
+                                1 [leaf]
+
+        ==> evaluates to 15
+Enter another postfix expression or <Enter> to end: 3 7 + 14 *
+                    *
+                        14 [leaf]
+                        +
+                            7 [leaf]
+                            3 [leaf]
+
+        ==> evaluates to 140
+Enter another postfix expression or <Enter> to end:
+This concludes the Binary Tree Math Postfix Expression program!
+
+Press any key to continue . . .*/
