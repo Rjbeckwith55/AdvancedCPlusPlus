@@ -41,12 +41,17 @@ public:
 	exp_node* get_root() {
 		return root;
 	}
+	void set_root(exp_node*);
 };
 
 
 
 
 // implementation
+void expression_tree::set_root(exp_node* r) {
+	root = r;
+}
+
 expression_tree::~expression_tree() {
 	tree_clear(root);
 }
