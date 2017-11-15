@@ -15,12 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab10\expression_tree.h">
+    <ClInclude Include="Lab 11\hashNode.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab 11\hashNode_template.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab 11\tableChain.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab 11\tableChain_template.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab10\expressionTree_test.cpp">
+    <ClCompile Include="Lab 11\tableChain_test.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
