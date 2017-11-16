@@ -74,6 +74,7 @@ void tableChain<RecordType>::remove(int key)
 {
 	// TO BE IMPLEMENTED
 	// See tableChain.h for description
+	//Remove the element from the chain
 }
 
 template <class RecordType>
