@@ -207,8 +207,142 @@ The following choices are available:
  F   Find the data associated with a specified key
  Q   Quit this test program
  D   Displays all the elements from the table
-Enter choice: d
+Enter choice: i
+Please enter a real number for a record's data: 33.2
+33.2 has been read.
+Please enter a non-negative integer for a key: 4058
+4058 has been read.
+The record has been inserted.
 
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 22.2
+22.2 has been read.
+Please enter a non-negative integer for a key: 2
+2 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 11.4
+11.4 has been read.
+Please enter a non-negative integer for a key: 1
+1 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 100
+100 has been read.
+Please enter a non-negative integer for a key: 811
+811 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 11.3
+11.3 has been read.
+Please enter a non-negative integer for a key: 1623
+1623 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 22.1
+22.1 has been read.
+Please enter a non-negative integer for a key: 2435
+2435 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 11.2
+11.2 has been read.
+Please enter a non-negative integer for a key: 3245
+3245 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 11.1
+11.1 has been read.
+Please enter a non-negative integer for a key: 5678
+5678 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: i
+Please enter a real number for a record's data: 33.1
+33.1 has been read.
+Please enter a non-negative integer for a key: 3
+3 has been read.
+The record has been inserted.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
 
 ***DISPLAY ALL TABLE ENTRIES
 Index = 0

@@ -44,7 +44,7 @@ int main()
 	test_record_type result;         // Value returned by find function
 
 	//test data for running quicker
-	result.data = 33.2;
+	/*result.data = 33.2;
 	result.key = 4058;
 	test.insert(result);
 	result.data = 22.2;
@@ -70,7 +70,7 @@ int main()
 	test.insert(result);
 	result.data = 33.1;
 	result.key = 3;
-	test.insert(result);
+	test.insert(result);*/
 
 	cout << "I have initialized an empty table. Each record in the table\n";
 	cout << "has an integer key and a real number as data." << endl;
