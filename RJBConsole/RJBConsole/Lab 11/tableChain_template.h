@@ -1,3 +1,6 @@
+/* Robert Beckwith - added remove
+11/16/17
+CIS 2542*/
 // FILE: tableChain_template.h
 // Written by: Michael Main (main@colorado.edu)
 // TEMPLATE CLASS IMPLEMENTED: Table (see tableChain.h for documentation)
@@ -68,13 +71,46 @@ void tableChain<RecordType>::insert(const RecordType& entry)
 	}
 }
 
+//   Postcondition: If a record was in the Table with the specified key, then
+//     that record has been removed; otherwise the table is unchanged.
 template <class RecordType>
 void tableChain<RecordType>::remove(int key)
 // Library facilities used: cassert, hashNode.h
 {
-	// TO BE IMPLEMENTED
-	// See tableChain.h for description
 	//Remove the element from the chain
+	assert(key >= 0);
+	hashNode<RecordType>* cursor;
+	hashNode<RecordType>* previous = nullptr;
+
+	cursor = data[hash(key)];
+	while ((cursor != nullptr) && ((cursor->data).key != key))
+	{
+		previous = cursor;
+		cursor = cursor->link;
+	} // cursor will be null if not found and previous will be the second to last element
+	
+
+	if (cursor != nullptr) {
+		if (previous != nullptr&&cursor->link == nullptr) // at the end of the current index
+			list_remove(previous);
+		else if (previous == nullptr) // first element in the current index
+		{
+			hashNode<RecordType> *remove_ptr;
+
+			remove_ptr = cursor;
+			cursor = cursor->link;
+			data[hash(key)] = cursor;
+			delete remove_ptr;
+			if (cursor == nullptr) { // index is empty
+				data[hash(key)] = nullptr;
+			}
+		}
+		else
+			list_remove(previous);
+		total_records--;
+	}
+	else
+		cout << "Not found in the table!" << endl;
 }
 
 template <class RecordType>
@@ -159,3 +195,187 @@ hashNode<RecordType>* tableChain<RecordType>::find_node(int key) const
 
 	return cursor;
 }
+
+/*I have initialized an empty table. Each record in the table
+has an integer key and a real number as data.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
+
+
+***DISPLAY ALL TABLE ENTRIES
+Index = 0
+        KEY=811 Data=100
+Index = 1
+        KEY=5678 Data=11.1
+        KEY=3245 Data=11.2
+        KEY=1623 Data=11.3
+        KEY=1 Data=11.4
+Index = 2
+        KEY=2435 Data=22.1
+        KEY=2 Data=22.2
+Index = 3
+        KEY=3 Data=33.1
+        KEY=4058 Data=33.2
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: r
+Please enter a non-negative integer for a key: 3245
+3245 has been read.
+Remove has been called with that key.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
+
+
+***DISPLAY ALL TABLE ENTRIES
+Index = 0
+        KEY=811 Data=100
+Index = 1
+        KEY=5678 Data=11.1
+        KEY=1623 Data=11.3
+        KEY=1 Data=11.4
+Index = 2
+        KEY=2435 Data=22.1
+        KEY=2 Data=22.2
+Index = 3
+        KEY=3 Data=33.1
+        KEY=4058 Data=33.2
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: r
+Please enter a non-negative integer for a key: 2
+2 has been read.
+Remove has been called with that key.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
+
+
+***DISPLAY ALL TABLE ENTRIES
+Index = 0
+        KEY=811 Data=100
+Index = 1
+        KEY=5678 Data=11.1
+        KEY=1623 Data=11.3
+        KEY=1 Data=11.4
+Index = 2
+        KEY=2435 Data=22.1
+Index = 3
+        KEY=3 Data=33.1
+        KEY=4058 Data=33.2
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: r
+Please enter a non-negative integer for a key: 3
+3 has been read.
+Remove has been called with that key.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
+
+
+***DISPLAY ALL TABLE ENTRIES
+Index = 0
+        KEY=811 Data=100
+Index = 1
+        KEY=5678 Data=11.1
+        KEY=1623 Data=11.3
+        KEY=1 Data=11.4
+Index = 2
+        KEY=2435 Data=22.1
+Index = 3
+        KEY=4058 Data=33.2
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: r
+Please enter a non-negative integer for a key: 811
+811 has been read.
+Remove has been called with that key.
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice: d
+
+
+***DISPLAY ALL TABLE ENTRIES
+Index = 1
+        KEY=5678 Data=11.1
+        KEY=1623 Data=11.3
+        KEY=1 Data=11.4
+Index = 2
+        KEY=2435 Data=22.1
+Index = 3
+        KEY=4058 Data=33.2
+
+The following choices are available:
+ S   Print the result from the size( ) function
+ I   Insert a new record with the insert(...) function
+ R   Remove a record with the remove(...) function
+ ?   Check whether a particular key is present
+ F   Find the data associated with a specified key
+ Q   Quit this test program
+ D   Displays all the elements from the table
+Enter choice:*/

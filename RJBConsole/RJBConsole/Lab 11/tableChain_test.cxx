@@ -43,6 +43,35 @@ int main()
 	bool found;                      // Value returned by find function
 	test_record_type result;         // Value returned by find function
 
+	//test data for running quicker
+	result.data = 33.2;
+	result.key = 4058;
+	test.insert(result);
+	result.data = 22.2;
+	result.key = 2;
+	test.insert(result);
+	result.data = 11.4;
+	result.key = 1;
+	test.insert(result);
+	result.data = 100;
+	result.key = 811;
+	test.insert(result);
+	result.data = 11.3;
+	result.key = 1623;
+	test.insert(result);
+	result.data = 22.1;
+	result.key = 2435;
+	test.insert(result);
+	result.data = 11.2;
+	result.key = 3245;
+	test.insert(result);
+	result.data = 11.1;
+	result.key = 5678;
+	test.insert(result);
+	result.data = 33.1;
+	result.key = 3;
+	test.insert(result);
+
 	cout << "I have initialized an empty table. Each record in the table\n";
 	cout << "has an integer key and a real number as data." << endl;
 
@@ -93,7 +122,7 @@ void print_menu()
 	cout << " ?   Check whether a particular key is present" << endl;
 	cout << " F   Find the data associated with a specified key" << endl;
 	cout << " Q   Quit this test program" << endl;
-	cout << "D Displays all the elements from the table " << endl;
+	cout << " D   Displays all the elements from the table " << endl;
 }
 
 char get_user_command()
