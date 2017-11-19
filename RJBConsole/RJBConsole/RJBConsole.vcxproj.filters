@@ -15,22 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab 11\hashNode.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lab 11\hashNode_template.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lab 11\tableChain.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lab 11\tableChain_template.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Lab 11\tableChain_test.cxx">
+    <ClCompile Include="Project2\BOM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Project2\BOM.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project2\Material.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
