@@ -18,6 +18,12 @@
     <ClCompile Include="Project2\BOM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Project2\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project2\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project2\BOM.h">

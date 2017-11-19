@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project2\BOM.cpp" />
+    <ClCompile Include="Project2\Main.cpp" />
+    <ClCompile Include="Project2\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project2\BOM.h" />
