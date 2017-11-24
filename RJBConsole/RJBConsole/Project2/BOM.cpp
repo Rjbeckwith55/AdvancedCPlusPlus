@@ -14,13 +14,14 @@ Descr:
 //populates the bill of materials tree with the spreadsheet data
 BOM::BOM() { //default constructor
 	Material* root = new Material();
-
-	ifstream i("file.json");
+	string x;
+	ifstream i("json.txt");
+	i >> x;
 	nlohmann::json j;
 	i >> j;
 
 	// write prettified JSON to another file
-	std::ofstream o("pretty.json");
-	o << std::setw(4) << j << std::endl;
+	ofstream o("pretty.json");
+	o << setw(4) << j << endl;
 	
 }

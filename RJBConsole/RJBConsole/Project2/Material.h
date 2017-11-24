@@ -8,6 +8,7 @@ Specification file for the Material class*/
 #include <string>
 #include <stack>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 #ifndef Material_H
