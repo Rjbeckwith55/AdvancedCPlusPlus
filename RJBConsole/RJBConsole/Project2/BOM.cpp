@@ -14,14 +14,83 @@ Descr:
 //populates the bill of materials tree with the spreadsheet data
 BOM::BOM() { //default constructor
 	Material* root = new Material();
-	string x;
-	ifstream i("json.txt");
-	i >> x;
-	nlohmann::json j;
-	i >> j;
+	string line ;
+	/****Note for myself currently the Default constructor is incomplete the data will need to be added
+	into the correct objects in order to have acces to them back on the main program and to be able to search them.*/
 
-	// write prettified JSON to another file
-	ofstream o("pretty.json");
-	o << setw(4) << j << endl;
+	//Spreadsheet data taken from ETC Treasury 11/23/17
+	ifstream file("Project2/Treasury.csv");
+	//parse the data from a csv file
+	int numLines = 0;
 	
+	while (!file.eof()) {
+		getline(file, line);
+		Material item;
+		int i = 0;
+		string temp = "";
+		//loop through until a comma is reached in the CSV file
+		for (; i <line.length()&& line[i] != ','; i++)
+		{
+			temp = temp + line[i];
+		}
+		item.setCost(stod(temp));
+		//skip the comma
+		if (line[i] == ',') {
+			i++;
+		}
+		for (; i <line.length() && line[i] != ','; i++)
+		{
+			temp = temp + line[i];
+		}
+		item.setName(temp);
+		//skip the comma
+		if (line[i] == ',') {
+			i++;
+		}
+		for (; i <line.length(); i++)
+		{
+			temp = temp + line[i];
+		}
+		//set the data into the BOM to the material that was just read in
+		item.setCategory(temp);
+		addItem(item);
+		numLines++;
+	}
+
+
+	// print out the data for testing
+	
+}		
+void BOM::addItem(Material m) {
+	data[current] = m;
+	num++;
+}
+//sort the array into an unordered map which will then be able to search for the values of the category faster.
+stack<Material> BOM::searchList(string cat) {
+	//key of a string and a mapped value of Material.
+	unordered_map<string, Material> umap;
+	
+	stack<Material> found;
+	//put all of the BOM data from an array into a map to search more efficiently
+	for (size_t i = 0; i < current; i++)
+	{
+		umap[data[i].getCategory()] = data[i];
+	}
+	//8 buckets by default
+
+	//now search and return all of the members of data from the category.
+
+	for (size_t i = 0; i < num; i++)
+	{
+		if (data[i].getCategory() == cat) {
+			found.push(data[i]);
+		}
+	}
+	
+	while (!found.empty()) {
+		//print and remove all the items from the stack
+		cout << found.top();
+		found.pop();
+	}
+	return found;
 }

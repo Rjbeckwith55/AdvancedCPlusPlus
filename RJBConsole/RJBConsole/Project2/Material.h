@@ -9,6 +9,7 @@ Specification file for the Material class*/
 #include <stack>
 #include <algorithm>
 #include <fstream>
+#include <unordered_map>
 using namespace std;
 
 #ifndef Material_H
@@ -23,16 +24,23 @@ private:
 	Material* right_field;
 public:
 	Material();
-	string getName();
-	string setName();
-	double getCost();
-	double setCost();
-	string getCategory();
-	string setCategory();
-	void displayMaterial(); // or do an overloaded operator
+	Material(string, double, string);
+	//mutators
+	const string getName() { return name; }
+	void setName(string);
+	const double getCost() { return cost; }
+	void setCost(double);
+	const string getCategory() { return category; }
+	void setCategory(string);
+
+	
+	friend ostream& operator <<(ostream&,Material); //overloaded operator to print out all the data of the material
 };
+
 /*Queries
 https://docs.google.com/spreadsheets/d/1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q/edit#gid=0
-https://spreadsheets.google.com/tq?tqx=out:JSON&tq=select%20*%20where%20G%20contains%20%27SS%27&key=1jJLek-Y_6n9JoBqEBNj88WaE_WBbgwrAdgvqharpnvI
+https://spreadsheets.google.com/tq?tqx=out:JSON&tq=select%20*%20where%20id%20equals%20%27A%27&key=1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q
+%20or%20%27B%27%20%27C%27%20
+1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q
 */
 #endif
