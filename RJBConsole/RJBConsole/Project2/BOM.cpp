@@ -6,9 +6,6 @@ Descr:
 	Implementation file for the BOM class*/
 
 #include "BOM.h"
-#include "json\src\json.hpp" // library from https://github.com/nlohmann/json to parse the JSON data from the spreadsheet
-
-//using json = nlohmann::json;
 
 //TODO: This will automatically intitialize the bill of materials from the spreadsheet sorted into a certain order
 //populates the bill of materials tree with the spreadsheet data
@@ -34,6 +31,7 @@ BOM::BOM() { //default constructor
 			temp = temp + line[i];
 		}
 		item.setCost(stod(temp));
+		temp = "";
 		//skip the comma
 		if (line[i] == ',') {
 			i++;
@@ -43,6 +41,7 @@ BOM::BOM() { //default constructor
 			temp = temp + line[i];
 		}
 		item.setName(temp);
+		temp = "";
 		//skip the comma
 		if (line[i] == ',') {
 			i++;
@@ -54,7 +53,7 @@ BOM::BOM() { //default constructor
 		//set the data into the BOM to the material that was just read in
 		item.setCategory(temp);
 		addItem(item);
-		numLines++;
+		current = numLines++;
 	}
 
 
