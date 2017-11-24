@@ -19,7 +19,9 @@ public:
 	BOM(); // default constructor
 	void addItem(Material);
 	stack<Material> searchList(string); // would return a stack of the items in an order
-	void displayList(); // will be given different arguments in order to print the array out in different ways (Probably Enumerated)
+	void displayList(); // will be given different arguments in order to print the array out in different ways
+	const int getNum() { return num; }
+	friend ostream& operator <<(ostream&, BOM);
 private:
 	int current = 0;
 	int num = 0;

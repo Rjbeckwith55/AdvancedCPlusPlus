@@ -13,7 +13,7 @@ int main() {
 	string category;
 
 	//prompt the user to serach for a something in the BOM
-	cout << "This is a program to access the robotics bill of materials" << endl;
+	cout << "This is a program to access the robotics bill of materials. Here it is:\n " <<BillofMaterials<< endl; // currently off by one
 	cout << "Enter the category you would like to display from the data" << endl;
 	cin >> category;
 	searchedItems = BillofMaterials.searchList(category);

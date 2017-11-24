@@ -25,12 +25,16 @@ BOM::BOM() { //default constructor
 		Material item;
 		int i = 0;
 		string temp = "";
+
 		//loop through until a comma is reached in the CSV file
+		//Get the cost of the material
 		for (; i <line.length()&& line[i] != ','; i++)
 		{
 			temp = temp + line[i];
 		}
 		item.setCost(stod(temp));
+
+		//Get the name of the material from the spreadsheet
 		temp = "";
 		//skip the comma
 		if (line[i] == ',') {
@@ -41,6 +45,8 @@ BOM::BOM() { //default constructor
 			temp = temp + line[i];
 		}
 		item.setName(temp);
+
+		//Get the category of the material from the spreadsheet
 		temp = "";
 		//skip the comma
 		if (line[i] == ',') {
@@ -52,6 +58,8 @@ BOM::BOM() { //default constructor
 		}
 		//set the data into the BOM to the material that was just read in
 		item.setCategory(temp);
+
+		//add the item to the BOM list
 		addItem(item);
 		current = numLines++;
 	}
@@ -59,11 +67,23 @@ BOM::BOM() { //default constructor
 
 	// print out the data for testing
 	
-}		
+}
+//Add an item to the BOM
 void BOM::addItem(Material m) {
 	data[current] = m;
 	num++;
 }
+
+//overloaded output operator
+ostream& operator <<(ostream& out, BOM b) {
+	//print out all of the data from the material
+	for (size_t i = 0; i < b.num; i++)
+	{
+		cout << b.data[i];
+	}
+	return out;
+}
+
 //sort the array into an unordered map which will then be able to search for the values of the category faster.
 stack<Material> BOM::searchList(string cat) {
 	//key of a string and a mapped value of Material.
