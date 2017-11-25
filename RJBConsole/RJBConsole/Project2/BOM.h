@@ -23,9 +23,9 @@ public:
 	void displayList(); // will be given different arguments in order to print the array out in different ways
 
 	//functions for heapsorting the data in different arrangements
-	void heapsort(int[ ], int n);
-	void make_heap(int[ ], int);
-	void reaheapify_down(int[ ], int);
+	void heapsort(int);
+	void make_heap(Material[ ], int);
+	void reheap_down(Material[ ], int);
 	int right_child(int);
 	int left_child(int);
 	int parent(int);
