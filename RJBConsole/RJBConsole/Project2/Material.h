@@ -25,7 +25,7 @@ private:
 public:
 	Material();
 	Material(string, double, string);
-	//mutators
+	// Mutators
 	const string getName() { return name; }
 	void setName(string);
 	const double getCost() { return cost; }
