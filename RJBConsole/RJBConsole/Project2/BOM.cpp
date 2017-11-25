@@ -7,13 +7,10 @@ Descr:
 
 #include "BOM.h"
 
-//TODO: This will automatically intitialize the bill of materials from the spreadsheet sorted into a certain order
-//populates the bill of materials tree with the spreadsheet data
+//Populates the material objects within the bill of materials
 BOM::BOM() { //default constructor
 	Material* root = new Material();
 	string line ;
-	/****Note for myself currently the Default constructor is incomplete the data will need to be added
-	into the correct objects in order to have acces to them back on the main program and to be able to search them.*/
 
 	//Spreadsheet data taken from ETC Treasury 11/23/17
 	ifstream file("Project2/Treasury.csv");
@@ -61,11 +58,8 @@ BOM::BOM() { //default constructor
 
 		//add the item to the BOM list
 		addItem(item);
-		current = numLines++;
+		current = ++numLines;
 	}
-
-
-	// print out the data for testing
 	
 }
 //Add an item to the BOM
@@ -112,4 +106,37 @@ stack<Material> BOM::searchList(string cat) {
 		found.pop();
 	}
 	return found;
+}
+
+void BOM::heapsort(int data [ ], int n)
+{
+	int unsorted = n;
+
+	make_heap(data, n);
+
+	while (unsorted > 1) {
+		--unsorted;
+		swap(data[0], data[unsorted]); //provided in <algorithm>
+		reheapify_down(data, unosorted);
+	}
+}
+
+void BOM::make_heap(int data[ ] , int n)
+{
+	int i; 
+	int k; 
+	for (size_t i =	1; i < n; i++) // loops through all the elements of the heap
+	{
+		k = 1;
+		while ((k > 0) && (data[k] > data[parent(k)]))
+		{
+			// swap the parent and the child of the parent if it is found that the child is larger.
+			swap(data[k], data[parent(k)]); 
+			k = parent(k);
+		}
+	}
+}
+
+void BOM::reaheapify_down(int[], int)
+{
 }

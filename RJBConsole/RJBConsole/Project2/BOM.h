@@ -17,10 +17,19 @@ class BOM {
 public:
 	static const int NUM_ITEMS = 30;
 	BOM(); // default constructor
+	const int getNum() { return num; }
 	void addItem(Material);
 	stack<Material> searchList(string); // would return a stack of the items in an order
 	void displayList(); // will be given different arguments in order to print the array out in different ways
-	const int getNum() { return num; }
+
+	//functions for heapsorting the data in different arrangements
+	void heapsort(int[ ], int n);
+	void make_heap(int[ ], int);
+	void reaheapify_down(int[ ], int);
+	int right_child(int);
+	int left_child(int);
+	int parent(int);
+
 	friend ostream& operator <<(ostream&, BOM);
 private:
 	int current = 0;

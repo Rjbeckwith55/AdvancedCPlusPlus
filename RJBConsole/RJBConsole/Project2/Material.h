@@ -32,15 +32,7 @@ public:
 	void setCost(double);
 	const string getCategory() { return category; }
 	void setCategory(string);
-
 	
 	friend ostream& operator <<(ostream&,Material); //overloaded operator to print out all the data of the material
 };
-
-/*Queries
-https://docs.google.com/spreadsheets/d/1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q/edit#gid=0
-https://spreadsheets.google.com/tq?tqx=out:JSON&tq=select%20*%20where%20id%20equals%20%27A%27&key=1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q
-%20or%20%27B%27%20%27C%27%20
-1oXSR3jUg-dtJDht0ZeoAnDO1GC62AbGO3NeTbYnkA-Q
-*/
 #endif
