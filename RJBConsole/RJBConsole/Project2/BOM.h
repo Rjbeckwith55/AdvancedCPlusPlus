@@ -14,11 +14,9 @@ Descr:
 struct mat_node {
 	Material data;
 	mat_node* link;
-
 	mat_node() { // default values
 		data = Material();
 		link = nullptr;
-
 	}
 };
 class BOM {
@@ -26,18 +24,24 @@ class BOM {
 public:
 	static const int NUM_ITEMS = 30;
 	BOM(); // default constructor
+	~BOM();
+	BOM(BOM&); // copy constructor
+	double getTotal();
+
+	void deleteNodes(mat_node*);
 	const int getNum() { return num; }
 	void addItem(Material);
 	void searchList(string); // would return a stack of the items in an order
 	void displayList(int,BOM&); // given an int to print out in different orders
+	void printMapCat();
 
 	//functions for traversing the map and linked list combo
-	void printLinked(mat_node*);
+	double printLinked(mat_node*);
 
 	//functions for heapsorting the data in different arrangements
 	void heapsort();
-	void make_heap(Material[ ], int);
-	void reheap_down(Material[ ], int);
+	void make_heap();
+	void reheap_down(int);
 	int right_child(int);
 	int left_child(int);
 	int parent(int);
@@ -47,6 +51,7 @@ private:
 	unordered_map<string, mat_node*> umap;
 	int current = 0;
 	int num = 0;
+	double totalCost = 0;
 	Material data[NUM_ITEMS];
 };
 #endif

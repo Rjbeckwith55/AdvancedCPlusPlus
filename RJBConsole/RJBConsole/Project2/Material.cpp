@@ -10,8 +10,6 @@ Material::Material() {
 	name = " ";
 	cost = 0.0;
 	category = " ";
-	left_field = nullptr;
-	right_field = nullptr;
 }
 Material::Material(string n, double c, string cat) {
 	name = n;

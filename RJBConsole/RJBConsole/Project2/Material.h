@@ -20,8 +20,6 @@ private:
 	string name; 
 	double cost; 
 	string category;
-	Material* left_field;
-	Material* right_field;
 public:
 	Material();
 	Material(string, double, string);

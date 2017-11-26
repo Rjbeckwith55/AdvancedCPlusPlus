@@ -7,17 +7,15 @@ Descr:
 
 #include "BOM.h"
 
-//TODO list
-/*
-Fix the unordered_map implemetation so it actually is able to print out all of the values from the linked list
-Properly deallocate the memory in the Destructor
-Fix the heapsort so that it will sort the data properly ( Going to be a fun time in the debugger /s)
---Make the UI better and cleaner and smoother and any other adjective I can think of
---Clean up code
-*/
+	//TODO list
+	/*
+	--Maybe make an all category on the unordered_map
+	--Figure out Alphabetical
+	--Make the UI better and cleaner and smoother and any other adjective I can think of
+	--Clean up code
+	*/
 
-
-	//Populates the material objects within the bill of materials
+// Get the data for the Bill of Materials from the spreadsheet and adds it to the data field of the BOM class
 BOM::BOM() { //default constructor
 	string line;
 
@@ -79,7 +77,8 @@ BOM::BOM() { //default constructor
 			mat_node* base = umap.find(item.getCategory())->second;
 			newNode->link = base; //add the new item as a link
 			umap.erase(item.getCategory()); // erase the current bucket this is a hack because insert and emplace were not overriding.
-			umap.insert({ item.getCategory(), newNode }); 
+			umap.insert({ item.getCategory(), newNode });
+
 		}
 		//key is not in the map
 		else {
@@ -87,9 +86,49 @@ BOM::BOM() { //default constructor
 			umap.insert({ item.getCategory(), newNode });
 		}
 
-		
+	}
+	//set the total cost of the entire list
+	for (size_t i = 0; i < num; i++)
+	{
+		totalCost += data[i].getCost();
+	}
+}
+// Destructor to release the memory and clear the map.
+BOM::~BOM()
+{
+
+	for (auto& x : umap) {
+		//deallocate the memory from the linked list 
+		deleteNodes(x.second);
 	}
 
+	// clear the map
+	umap.clear();
+}
+//Copy constructor solved an issue where the destructor was called too early
+BOM::BOM(BOM & source) // copy constructor
+{
+	for (int i = 0; i < source.num; i++) {
+		data[i] = source.data[i];
+	}
+	num = source.num;
+	current = source.current;
+}
+
+double BOM::getTotal()
+{
+	return totalCost;
+}
+
+
+//recursive deletion of the nodes in a linked list
+void BOM::deleteNodes(mat_node * node)
+{
+	if (node != nullptr) {
+		node = node->link;
+		deleteNodes(node);
+	}
+	delete node;
 }
 
 //Add an item to the BOM
@@ -108,44 +147,39 @@ ostream& operator <<(ostream& out, BOM b) {
 	return out;
 }
 
-//sort the array into an unordered map which will then be able to search for the values of the category faster.
+//Use the map to display the category display the data in that category
 void BOM::searchList(string cat) {
+	string category;
+	double total;
 
 	//all of the data sorted by category is distributed in the unordered_map umap;
-
 	if (umap.find(cat) != umap.end()) {
-		printLinked(umap.find(cat)->second);
+		cout << endl;
+		total = printLinked(umap.find(cat)->second);
+		cout << "The total cost of this category is: $" << total << endl;
+		cout << endl;
+	}
+	else {
+		cout << endl;
+		cout << "**Category not found!**" << endl;
+		cout << "Enter the category you would like to display from the data" << endl;
+		cout << "The categories are: "; printMapCat();
+		cin >> category;
+		searchList(category);
 	}
 
-	//now search and return all of the members of data from the category.
-
-	//for (size_t i = 0; i < num; i++)
-	//{
-	//	if (data[i].getCategory() == cat) {
-	//		found.push(data[i]);
-	//	}
-	//}
-
-	//while (!found.empty()) {
-	//	//print and remove all the items from the stack
-	//	cout << found.top();
-	//	found.pop();
-	//}
-	//return found;
 }
 
-//passed the type of sort needed and the bill of materials object so the overloaded operator can be used
-//uses a stack to swap the direction of the sort for printing
+// Passed the type of sort needed and the bill of materials object so the overloaded operator can be used
+// Uses a stack to swap the direction of the sort for printing
 void BOM::displayList(int type, BOM& Bill)
 {
+	cout << endl;
 	stack<Material> items;
-	switch (type) {
+	int sortType;
+
+	switch (type) {	
 	case 1:
-		//Ascending by cost
-		Bill.heapsort();
-		cout << Bill;
-		break;
-	case 2:
 		//Descending by cost
 		//swap the print order by using a stack
 		Bill.heapsort();
@@ -157,20 +191,52 @@ void BOM::displayList(int type, BOM& Bill)
 			cout << items.top();
 			items.pop();
 		}
+		cout << endl;
+		cout << "The Total cost of this Bill of Materials is: $" << Bill.getTotal() << endl;
 		break;
+
+	case 2:
+		//Ascending by cost
+		Bill.heapsort();
+		cout << Bill;
+		cout << endl;
+		cout << "The Total cost of this Bill of Materials is: $" << Bill.getTotal() << endl;
+		break;
+
 	case 3:
 		//Alphabetically
 		break;
+	default:
+		cout << "**Please choose the number next to the type of sort**" << endl;
+		cout << "How would you like to sort the Bill of Materials?" << endl;
+		cout << "1. Ascending by cost" << endl;
+		cout << "2. Descending by cost" << endl;
+		cout << "3. Alphabetically" << endl;
+		cin >> sortType;
+		displayList(sortType, Bill);
 	}
+	
 }
 
-void BOM::printLinked(mat_node * node)
+void BOM::printMapCat()
 {
+	for (auto& x : umap) {
+		cout << x.first << " ";
+	}
+	cout << ": ";
+}
+
+// Recursive print and add the cost up of the linked list
+double BOM::printLinked(mat_node * node)
+{
+	double total = 0;
 	if (node != nullptr) {
 		cout << node->data;
+		total += node->data.getCost();
 		node = node->link;
-		printLinked(node);
+		total += printLinked(node);
 	}
+	return total;
 }
 
 
@@ -181,25 +247,25 @@ void BOM::heapsort()
 {
 	int unsorted = num; // number of elements to sort
 
-
 	//create a heap of the current data
-	make_heap(data, num);
+	make_heap();
 
 	while (unsorted > 1) {
 		--unsorted;
 		swap(data[0], data[unsorted]); //provided in <algorithm>
-		reheap_down(data, unsorted);
+		reheap_down(unsorted);
 	}
 
 }
 
-void BOM::make_heap(Material data[], int n)
+void BOM::make_heap()
 {
 	int i; // the index of the new node in the heap
 	int k;
-	for (i = 1; i < n; i++) // loops through all the elements of the heap
+
+	for (i = 1; i < num; ++i) // loops through all the elements of the heap
 	{
-		k = 1;
+		k = i;
 		// if the child that is being pushed up is larger than the parent it needs to swap postititions with the parent
 		while ((k > 0) && (data[k] > data[parent(k)]))
 		{
@@ -211,7 +277,7 @@ void BOM::make_heap(Material data[], int n)
 }
 
 //n represents the segment of the heap that needs to be sorted
-void BOM::reheap_down(Material data[], int n)
+void BOM::reheap_down(int unsorted)
 {
 	int currentIndex = 0;
 	int big_child_index; // index of the child that is larger than the parent and will need to be swapped with the parent
@@ -219,10 +285,10 @@ void BOM::reheap_down(Material data[], int n)
 
 	//Loops through until the heap has been completed this will be when all the children are less than the parents.
 	// The second part of the while loop compares the left child to the number of elements in the heap.
-	while ((!heap_complete) && (left_child(currentIndex) < n)) {
+	while ((!heap_complete) && (left_child(currentIndex) < unsorted)) {
 		// get the right child of the current node and check
 		// n represents the number of nodes in this section of the heap
-		if (right_child(currentIndex) >= n) {
+		if (right_child(currentIndex) >= unsorted) {
 			// there is no right child. Set the biggest child from this node to the left child
 			big_child_index = left_child(currentIndex);
 		}
