@@ -65,16 +65,21 @@ BOM::BOM() { //default constructor
 		//set the data into the BOM to the material that was just read in
 		item.setCategory(temp);
 
+		//add the item to the BOM list
+		addItem(item);
+		current = ++numLines;
 
-		//map with key values of the category and the second value is a linked list of all the items in that category
+		//map with key values of the string category and the second value is a linked list of all the items in that category
 		mat_node* newNode = new mat_node();
 		newNode->data = item;
+
 		// Key is already in the map
 		if (umap.find(item.getCategory()) != umap.end()) {
 			//insert the item before the first item
 			mat_node* base = umap.find(item.getCategory())->second;
-			newNode->link = base; //TODO: for some reason this is not working and the links are getting set to null
-			umap.insert({ item.getCategory(), newNode });
+			newNode->link = base; //add the new item as a link
+			umap.erase(item.getCategory()); // erase the current bucket this is a hack because insert and emplace were not overriding.
+			umap.insert({ item.getCategory(), newNode }); 
 		}
 		//key is not in the map
 		else {
@@ -82,9 +87,7 @@ BOM::BOM() { //default constructor
 			umap.insert({ item.getCategory(), newNode });
 		}
 
-		//add the item to the BOM list
-		addItem(item);
-		current = ++numLines;
+		
 	}
 
 }
