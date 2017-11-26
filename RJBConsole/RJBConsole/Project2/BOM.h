@@ -11,7 +11,16 @@ Descr:
 #ifndef BOM_H
 #define BOM_H
 	//struct for the nodes of the bill of materials tree
+struct mat_node {
+	Material data;
+	mat_node* link;
 
+	mat_node() { // default values
+		data = Material();
+		link = nullptr;
+
+	}
+};
 class BOM {
 
 public:
@@ -19,8 +28,11 @@ public:
 	BOM(); // default constructor
 	const int getNum() { return num; }
 	void addItem(Material);
-	stack<Material> searchList(string); // would return a stack of the items in an order
-	void displayList(int,BOM&); // given data to print out in different orders
+	void searchList(string); // would return a stack of the items in an order
+	void displayList(int,BOM&); // given an int to print out in different orders
+
+	//functions for traversing the map and linked list combo
+	void printLinked(mat_node*);
 
 	//functions for heapsorting the data in different arrangements
 	void heapsort();
@@ -32,6 +44,7 @@ public:
 
 	friend ostream& operator <<(ostream&, BOM);
 private:
+	unordered_map<string, mat_node*> umap;
 	int current = 0;
 	int num = 0;
 	Material data[NUM_ITEMS];

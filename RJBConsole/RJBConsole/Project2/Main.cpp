@@ -18,7 +18,7 @@ int main() {
 	cout << "Enter the category you would like to display from the data" << endl;
 	cin >> category;
 	//needs modification to be able to handle a map
-	searchedItems = BillofMaterials.searchList(category);
+	BillofMaterials.searchList(category);
 	cout << "How would you like to sort the Bill of Materials?" << endl;
 	cout << "1. Ascending by cost" << endl;
 	cout << "2. Descending by cost" << endl;

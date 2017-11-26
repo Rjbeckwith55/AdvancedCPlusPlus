@@ -7,9 +7,18 @@ Descr:
 
 #include "BOM.h"
 
+//TODO list
+/*
+Fix the unordered_map implemetation so it actually is able to print out all of the values from the linked list
+Properly deallocate the memory in the Destructor
+Fix the heapsort so that it will sort the data properly ( Going to be a fun time in the debugger /s)
+--Make the UI better and cleaner and smoother and any other adjective I can think of
+--Clean up code
+*/
+
+
 	//Populates the material objects within the bill of materials
 BOM::BOM() { //default constructor
-	Material* root = new Material();
 	string line;
 
 	//Spreadsheet data taken from ETC Treasury 11/23/17
@@ -56,12 +65,30 @@ BOM::BOM() { //default constructor
 		//set the data into the BOM to the material that was just read in
 		item.setCategory(temp);
 
+
+		//map with key values of the category and the second value is a linked list of all the items in that category
+		mat_node* newNode = new mat_node();
+		newNode->data = item;
+		// Key is already in the map
+		if (umap.find(item.getCategory()) != umap.end()) {
+			//insert the item before the first item
+			mat_node* base = umap.find(item.getCategory())->second;
+			newNode->link = base; //TODO: for some reason this is not working and the links are getting set to null
+			umap.insert({ item.getCategory(), newNode });
+		}
+		//key is not in the map
+		else {
+			// Insert the current material into the linked list on the map
+			umap.insert({ item.getCategory(), newNode });
+		}
+
 		//add the item to the BOM list
 		addItem(item);
 		current = ++numLines;
 	}
 
 }
+
 //Add an item to the BOM
 void BOM::addItem(Material m) {
 	data[current] = m;
@@ -79,38 +106,34 @@ ostream& operator <<(ostream& out, BOM b) {
 }
 
 //sort the array into an unordered map which will then be able to search for the values of the category faster.
-stack<Material> BOM::searchList(string cat) {
-	//key of a string and a mapped value of Material.
-	unordered_map<string, Material> umap;
+void BOM::searchList(string cat) {
 
-	stack<Material> found;
-	//put all of the BOM data from an array into a map to search more efficiently
-	for (size_t i = 0; i < current; i++)
-	{
-		umap[data[i].getCategory()] = data[i];
+	//all of the data sorted by category is distributed in the unordered_map umap;
+
+	if (umap.find(cat) != umap.end()) {
+		printLinked(umap.find(cat)->second);
 	}
-	//8 buckets by default
 
 	//now search and return all of the members of data from the category.
 
-	for (size_t i = 0; i < num; i++)
-	{
-		if (data[i].getCategory() == cat) {
-			found.push(data[i]);
-		}
-	}
+	//for (size_t i = 0; i < num; i++)
+	//{
+	//	if (data[i].getCategory() == cat) {
+	//		found.push(data[i]);
+	//	}
+	//}
 
-	while (!found.empty()) {
-		//print and remove all the items from the stack
-		cout << found.top();
-		found.pop();
-	}
-	return found;
+	//while (!found.empty()) {
+	//	//print and remove all the items from the stack
+	//	cout << found.top();
+	//	found.pop();
+	//}
+	//return found;
 }
 
 //passed the type of sort needed and the bill of materials object so the overloaded operator can be used
 //uses a stack to swap the direction of the sort for printing
-void BOM::displayList(int type,BOM& Bill)
+void BOM::displayList(int type, BOM& Bill)
 {
 	stack<Material> items;
 	switch (type) {
@@ -138,13 +161,24 @@ void BOM::displayList(int type,BOM& Bill)
 	}
 }
 
+void BOM::printLinked(mat_node * node)
+{
+	if (node != nullptr) {
+		cout << node->data;
+		node = node->link;
+		printLinked(node);
+	}
+}
+
+
+
 // heapsort demonstrates the use of trees and sorting
 // a lot of logic was taken from the heapsort example but was modified in order to sort the materials
 void BOM::heapsort()
 {
 	int unsorted = num; // number of elements to sort
-	
-	
+
+
 	//create a heap of the current data
 	make_heap(data, num);
 
@@ -195,7 +229,7 @@ void BOM::reheap_down(Material data[], int n)
 		}
 		else
 			//right child is the bigger of the two nodes.
-			big_child_index = right_child (currentIndex);
+			big_child_index = right_child(currentIndex);
 
 		//check whether the larger child is bigger than the current node
 		if (data[currentIndex] < data[big_child_index]) {
@@ -205,7 +239,7 @@ void BOM::reheap_down(Material data[], int n)
 		}
 		// the heap is completed because the current node is larger than the child nodes
 		else
-			heap_complete = true; 
+			heap_complete = true;
 	}
 }
 // This represents postorder traversal of the tree structure
