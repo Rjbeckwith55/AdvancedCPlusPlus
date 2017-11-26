@@ -108,20 +108,43 @@ stack<Material> BOM::searchList(string cat) {
 	return found;
 }
 
-// heapsort demonstrates the use of trees and sorting
-// a lot of logic was taken from the heapsort example but was modified in order to sort the materials
-void BOM::heapsort(int type)
+//passed the type of sort needed and the bill of materials object so the overloaded operator can be used
+//uses a stack to swap the direction of the sort for printing
+void BOM::displayList(int type,BOM& Bill)
 {
-	int unsorted = num; // number of elements to sort
-	
+	stack<Material> items;
 	switch (type) {
 	case 1:
 		//Ascending by cost
+		Bill.heapsort();
+		cout << Bill;
+		break;
 	case 2:
 		//Descending by cost
+		//swap the print order by using a stack
+		Bill.heapsort();
+		for (int i = 0; i < num; i++) // off by one
+		{
+			items.push(Bill.data[i]);
+		}
+		while (!items.empty()) {
+			cout << items.top();
+			items.pop();
+		}
+		break;
 	case 3:
 		//Alphabetically
+		break;
 	}
+}
+
+// heapsort demonstrates the use of trees and sorting
+// a lot of logic was taken from the heapsort example but was modified in order to sort the materials
+void BOM::heapsort()
+{
+	int unsorted = num; // number of elements to sort
+	
+	
 	//create a heap of the current data
 	make_heap(data, num);
 
@@ -130,6 +153,7 @@ void BOM::heapsort(int type)
 		swap(data[0], data[unsorted]); //provided in <algorithm>
 		reheap_down(data, unsorted);
 	}
+
 }
 
 void BOM::make_heap(Material data[], int n)

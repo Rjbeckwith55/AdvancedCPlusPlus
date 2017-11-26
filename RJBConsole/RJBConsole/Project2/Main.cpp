@@ -11,7 +11,7 @@ int main() {
 	stack<Material> searchedItems;
 	 // test data
 	string category;
-	int sort;
+	int sortType;
 
 	//prompt the user to serach for a something in the BOM
 	cout << "This is a program to access the robotics bill of materials. Here it is:\n " <<BillofMaterials<< endl; // currently off by one
@@ -23,9 +23,9 @@ int main() {
 	cout << "1. Ascending by cost" << endl;
 	cout << "2. Descending by cost" << endl;
 	cout << "3. Alphabetically" << endl;
-	cin >> sort;
+	cin >> sortType;
 	//sorts the data based on how the user would like it sorted and displayed
-	BillofMaterials.heapsort(sort);
+	BillofMaterials.displayList(sortType,BillofMaterials); //TODO: data currently is being printed without being sorted
 
 	return EXIT_SUCCESS;
 }

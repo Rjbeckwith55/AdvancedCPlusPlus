@@ -33,6 +33,16 @@ void Material::setCategory(string cat)
 	category = cat;
 }
 
+//compare the costs using an overloaded operator
+bool Material::operator>(Material m)
+{
+	return (cost > m.cost);
+}
+bool Material::operator<(Material m)
+{
+	return (cost < m.cost);
+}
+
 ostream& operator <<(ostream& out,Material m) {
 	//print out all of the data from the material
 	out << "$" << m.cost << " " << m.name << " for " << m.category << endl;

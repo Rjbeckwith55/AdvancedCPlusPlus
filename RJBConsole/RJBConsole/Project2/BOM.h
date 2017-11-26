@@ -20,10 +20,10 @@ public:
 	const int getNum() { return num; }
 	void addItem(Material);
 	stack<Material> searchList(string); // would return a stack of the items in an order
-	void displayList(); // will be given different arguments in order to print the array out in different ways
+	void displayList(int,BOM&); // given data to print out in different orders
 
 	//functions for heapsorting the data in different arrangements
-	void heapsort(int);
+	void heapsort();
 	void make_heap(Material[ ], int);
 	void reheap_down(Material[ ], int);
 	int right_child(int);

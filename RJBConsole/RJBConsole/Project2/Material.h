@@ -33,6 +33,9 @@ public:
 	const string getCategory() { return category; }
 	void setCategory(string);
 	
+	bool operator >(Material);
+	bool operator <(Material);
+
 	friend ostream& operator <<(ostream&,Material); //overloaded operator to print out all the data of the material
 };
 #endif
